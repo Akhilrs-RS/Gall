@@ -4,6 +4,7 @@ import aboutStoryImg from './assets/a2.png'
 import industryImg from './assets/i1.png'
 import contactImg from './assets/contact.png'
 import worksImg from './assets/w1.png'
+import logoImg from './assets/logo.jpg'
 
 function App() {
   const [view, setView] = useState<'about' | 'works' | 'industry' | 'contact'>('about')
@@ -67,8 +68,12 @@ function App() {
           
           {/* Logo */}
           <div className="flex items-center">
-            <a href="/" className="font-outfit font-extrabold tracking-[0.18em] text-[22px] text-[#4ec2e0] hover:opacity-90 transition-opacity">
-              GALLETRIX
+            <a href="/" className="hover:opacity-90 transition-opacity flex items-center">
+              <img 
+                src={logoImg} 
+                alt="GALLETRIX" 
+                className="h-10 md:h-12 w-auto object-contain rounded-md"
+              />
             </a>
           </div>
 
