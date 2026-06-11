@@ -12,9 +12,12 @@ import g2Img from './assets/g2.png'
 import g3Img from './assets/g3.png'
 import g5Gif from './assets/g5.gif'
 import g0Img from './assets/g0.png'
+import erpImg from './assets/erp.png'
+import careersImg from './assets/c9.png'
+import automationImg from './assets/a23.png'
 
 function App() {
-  const [view, setView] = useState<'about' | 'works' | 'industry' | 'contact' | 'services' | 'other'>('about')
+  const [view, setView] = useState<'about' | 'works' | 'industry' | 'contact' | 'services' | 'erp' | 'automation' | 'careers' | 'other'>('about')
   const [contactScrollTarget, setContactScrollTarget] = useState<1 | 2 | 3 | null>(null)
 
   const navigateToContact = (page: 1 | 2 | 3) => {
@@ -38,6 +41,8 @@ function App() {
         setView('industry')
       } else if (hash.startsWith('#services')) {
         setView('services')
+      } else if (hash.startsWith('#erp')) {
+        setView('erp')
       } else if (hash.startsWith('#works')) {
         setView('works')
       } else if (hash.startsWith('#contact')) {
@@ -56,6 +61,10 @@ function App() {
         }
       } else if (hash.startsWith('#about') || hash === '' || hash === '#') {
         setView('about')
+      } else if (hash.startsWith('#careers')) {
+        setView('careers')
+      } else if (hash.startsWith('#automation')) {
+        setView('automation')
       } else {
         setView('other')
       }
@@ -95,19 +104,179 @@ function App() {
 
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center space-x-10">
-            <div className="relative group">
+            <div className="group">
               <a 
                 href="#services"
                 onClick={() => setView('services')}
                 className={`flex items-center gap-1.5 text-[15px] font-medium transition-colors duration-200 cursor-pointer ${
-                  view === 'services' ? 'text-[#cc6f2a]' : 'text-slate-300 hover:text-white'
+                  view === 'services' || view === 'erp' ? 'text-[#cc6f2a]' : 'text-slate-300 hover:text-white'
                 }`}
               >
                 Services
-                <svg className={`w-3 h-3 mt-0.5 transition-colors ${view === 'services' ? 'text-[#cc6f2a]' : 'text-slate-400 group-hover:text-white'}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                <svg className={`w-3 h-3 mt-0.5 transition-colors ${view === 'services' || view === 'erp' ? 'text-[#cc6f2a]' : 'text-slate-400 group-hover:text-white'}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
               </a>
+
+              {/* Services Dropdown Overlay */}
+              <div className="absolute top-full left-0 right-0 w-full bg-[#07080a] border-b border-slate-900 shadow-2xl py-16 z-40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                <div className="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-y-10 gap-x-16">
+                  {/* ERP Solutions */}
+                  <a 
+                    href="#erp" 
+                    onClick={() => {
+                      setView('erp')
+                    }} 
+                    className="flex items-start gap-4 hover:opacity-80 transition-opacity"
+                  >
+                    <div className="mt-1 flex-shrink-0 text-white">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 7c0-1.657 3.582-3 8-3s8 1.343 8 3M4 7c0 1.657 3.582 3 8 3s8-1.343 8-3M4 7v10c0 1.657 3.582 3 8 3s8-1.343 8-3V7M4 12c0 1.657 3.582 3 8 3s8-1.343 8-3" />
+                      </svg>
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="font-sans text-[17px] font-semibold text-white leading-tight">
+                        ERP Solutions
+                      </span>
+                      <span className="font-sans text-[13px] font-medium text-slate-400 mt-1.5 leading-normal">
+                        Manage business operations
+                      </span>
+                    </div>
+                  </a>
+
+                  {/* Business Automation */}
+                  <a 
+                    href="#automation" 
+                    onClick={() => {
+                      setView('automation')
+                    }} 
+                    className="flex items-start gap-4 hover:opacity-80 transition-opacity"
+                  >
+                    <div className="mt-1 flex-shrink-0 text-white">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v4M12 10H5v4M12 10h7v4M12 10v4M10 2h4v4h-4zM3 14h4v4H3zM10 14h4v4h-4zM17 14h4v4h-4z" />
+                      </svg>
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="font-sans text-[17px] font-semibold text-white leading-tight">
+                        Business Automation
+                      </span>
+                      <span className="font-sans text-[13px] font-medium text-slate-400 mt-1.5 leading-normal">
+                        Automate daily workflows
+                      </span>
+                    </div>
+                  </a>
+
+                  {/* Web Application Development */}
+                  <a 
+                    href="#services" 
+                    onClick={() => {
+                      setView('services')
+                      setTimeout(() => {
+                        const el = document.getElementById('services-page-2')
+                        if (el) el.scrollIntoView({ behavior: 'smooth' })
+                      }, 100)
+                    }} 
+                    className="flex items-start gap-4 hover:opacity-80 transition-opacity"
+                  >
+                    <div className="mt-1 flex-shrink-0 text-white">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                      </svg>
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="font-sans text-[17px] font-semibold text-white leading-tight">
+                        Web Application Development
+                      </span>
+                      <span className="font-sans text-[13px] font-medium text-slate-400 mt-1.5 leading-normal">
+                        Automate daily workflows
+                      </span>
+                    </div>
+                  </a>
+
+                  {/* Dashboard & Analytics */}
+                  <a 
+                    href="#services" 
+                    onClick={() => {
+                      setView('services')
+                      setTimeout(() => {
+                        const el = document.getElementById('services-page-2')
+                        if (el) el.scrollIntoView({ behavior: 'smooth' })
+                      }, 100)
+                    }} 
+                    className="flex items-start gap-4 hover:opacity-80 transition-opacity"
+                  >
+                    <div className="mt-1 flex-shrink-0 text-white">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M18 20V10M12 20V4M6 20v-6" />
+                      </svg>
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="font-sans text-[17px] font-semibold text-white leading-tight">
+                        Dashboard & Analytics
+                      </span>
+                      <span className="font-sans text-[13px] font-medium text-slate-400 mt-1.5 leading-normal">
+                        Turn data into insights
+                      </span>
+                    </div>
+                  </a>
+
+                  {/* Digital Marketing */}
+                  <a 
+                    href="#services" 
+                    onClick={() => {
+                      setView('services')
+                      setTimeout(() => {
+                        const el = document.getElementById('services-page-2')
+                        if (el) el.scrollIntoView({ behavior: 'smooth' })
+                      }, 100)
+                    }} 
+                    className="flex items-start gap-4 hover:opacity-80 transition-opacity"
+                  >
+                    <div className="mt-1 flex-shrink-0 text-white">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                      </svg>
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="font-sans text-[17px] font-semibold text-white leading-tight">
+                        Digital Marketing
+                      </span>
+                      <span className="font-sans text-[13px] font-medium text-slate-400 mt-1.5 leading-normal">
+                        Grow your online presence
+                      </span>
+                    </div>
+                  </a>
+
+                  {/* UI/UX Design */}
+                  <a 
+                    href="#services" 
+                    onClick={() => {
+                      setView('services')
+                      setTimeout(() => {
+                        const el = document.getElementById('services-page-2')
+                        if (el) el.scrollIntoView({ behavior: 'smooth' })
+                      }, 100)
+                    }} 
+                    className="flex items-start gap-4 hover:opacity-80 transition-opacity"
+                  >
+                    <div className="mt-1 flex-shrink-0 text-white">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                      </svg>
+                    </div>
+                    <div className="flex flex-col text-left">
+                      <span className="font-sans text-[17px] font-semibold text-white leading-tight">
+                        UI/UX Design
+                      </span>
+                      <span className="font-sans text-[13px] font-medium text-slate-400 mt-1.5 leading-normal">
+                        Design better user experiences
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              </div>
             </div>
             
             <a 
@@ -143,6 +312,16 @@ function App() {
               }`}
             >
               Works
+            </a>
+
+            <a 
+              href="#careers" 
+              onClick={() => setView('careers')}
+              className={`text-[15px] font-medium transition-colors duration-200 ${
+                view === 'careers' ? 'text-[#cc6f2a]' : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              Careers
             </a>
 
             <a 
@@ -1439,7 +1618,11 @@ function App() {
                 {/* Cards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                   {/* Card 1: ERP Solutions */}
-                  <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
+                  <a 
+                    href="#erp"
+                    onClick={() => setView('erp')}
+                    className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 hover:scale-[1.01] transition-all duration-300 text-left cursor-pointer"
+                  >
                     <div className="text-slate-300 mb-6">
                       <svg className="w-6 h-6 text-slate-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4 7c0-1.657 3.582-3 8-3s8 1.343 8 3M4 7c0 1.657 3.582 3 8 3s8-1.343 8-3M4 7v10c0 1.657 3.582 3 8 3s8-1.343 8-3V7M4 12c0 1.657 3.582 3 8 3s8-1.343 8-3" />
@@ -1451,12 +1634,12 @@ function App() {
                     <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
                       Unified enterprise resource planning systems that integrate every facet of your operations into a single, intelligent platform.
                     </p>
-                  </div>
+                  </a>
 
                   {/* Card 2: Business Automation */}
-                  <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
-                    <div className="text-slate-300 mb-6">
-                      <svg className="w-6 h-6 text-slate-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <a href="#automation" onClick={() => setView('automation')} className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#539be2]/50 hover:bg-[#021627]/60 transition-all duration-300 group cursor-pointer">
+                    <div className="text-slate-300 mb-6 group-hover:text-[#539be2] transition-colors">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v4M12 10H5v4M12 10h7v4M12 10v4M10 2h4v4h-4zM3 14h4v4H3zM10 14h4v4h-4zM17 14h4v4h-4z" />
                       </svg>
                     </div>
@@ -1466,7 +1649,7 @@ function App() {
                     <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
                       Eliminate manual processes with intelligent automation that adapts to your workflows and scales with your growth.
                     </p>
-                  </div>
+                  </a>
 
                   {/* Card 3: Web Application Development */}
                   <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
@@ -1612,6 +1795,769 @@ function App() {
                   className="bg-black hover:bg-slate-900 text-white px-9 py-4 rounded-full text-[15px] font-semibold flex items-center gap-2.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-md"
                 >
                   Let's Talk
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+            </section>
+          </>
+        )}
+
+        {view === 'erp' && (
+          <>
+            {/* ERP Solutions Page */}
+            <section id="erp" className="w-full bg-[#07080a] min-h-[calc(100vh-6rem)] flex items-center py-20 md:py-28 animate-fade-in">
+              <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                {/* Left Column: Text */}
+                <div className="lg:col-span-7 flex flex-col items-start text-left">
+                  <span className="font-sans text-[15px] sm:text-[16px] font-semibold text-slate-400 tracking-wide mb-6">
+                    Galletrix Service
+                  </span>
+                  
+                  <h1 className="font-serif text-[44px] sm:text-[56px] md:text-[72px] font-semibold leading-[1.1] text-white tracking-tight mb-8">
+                    ERP Solutions
+                  </h1>
+                  
+                  <h2 className="font-sans text-[18px] sm:text-[21px] md:text-[23px] font-semibold text-[#539be2] mb-6 leading-snug">
+                    Manage every business operation in one place
+                  </h2>
+                  
+                  <p className="font-sans text-[15px] sm:text-[17px] leading-[1.75] text-slate-400 max-w-xl">
+                    Galletrix builds intelligent ERP systems that help businesses manage employees, departments, workflows, reports, approvals, and business operations from one powerful platform.
+                  </p>
+                </div>
+
+                {/* Right Column: Image with Glow */}
+                <div className="lg:col-span-5 flex justify-center w-full">
+                  <div className="relative rounded-[24px] md:rounded-[32px] overflow-hidden border border-slate-900 shadow-[0_0_60px_rgba(59,130,246,0.3)] hover:scale-[1.01] transition-all duration-300">
+                    <img 
+                      src={erpImg} 
+                      alt="Galletrix ERP Solutions - Intelligent Connected Systems" 
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Page 2: ERP Overview & Capabilities */}
+            <section id="erp-page-2" className="w-full bg-gradient-to-b from-[#000000] to-[#021627] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+              <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col animate-fade-in">
+                {/* Top Grid: Overview */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 w-full mb-32 items-start">
+                  <div className="flex flex-col items-start text-left">
+                    <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase">
+                      Overview
+                    </span>
+                    <h2 className="font-serif text-[42px] sm:text-[52px] font-medium leading-[1.15] text-white tracking-tight">
+                      What We <span className="text-[#539be2] font-semibold">Deliver</span>
+                    </h2>
+                  </div>
+                  <div className="text-left">
+                    <p className="font-sans text-[16px] sm:text-[17px] leading-[1.8] text-slate-300 max-w-2xl">
+                      ERP solutions help businesses centralize operations, reduce manual tracking, improve team coordination, and manage business processes more efficiently. By unifying all departments and workflows into a single intelligent platform, organizations gain complete visibility into their operations, enabling faster responses, better resource allocation, and a foundation for sustainable growth.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Bottom Center Header */}
+                <div className="flex flex-col items-center text-center mb-20">
+                  <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase">
+                    Capabilities
+                  </span>
+                  <h2 className="font-serif text-[42px] sm:text-[52px] font-medium leading-[1.15] text-white tracking-tight">
+                    Key Features
+                  </h2>
+                </div>
+
+                {/* Grid of 6 Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
+                  {/* Card 1: Employee Management */}
+                  <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                    <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a6 6 0 00-10.8 0M12 10a4 4 0 100-8 4 4 0 000 8z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">
+                      Employee Management
+                    </h3>
+                    <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">
+                      Manage employee profiles, roles, assignments, and performance tracking from a centralized system.
+                    </p>
+                  </div>
+
+                  {/* Card 2: Department Management */}
+                  <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                    <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                    </div>
+                    <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">
+                      Department Management
+                    </h3>
+                    <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">
+                      Organize departments, teams, and hierarchies with clear structure and reporting lines.
+                    </p>
+                  </div>
+
+                  {/* Card 3: Payroll & Attendance */}
+                  <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                    <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.22.029a3.075 3.075 0 002.456-1.047 3.072 3.072 0 00-.724-4.226l-.08-.057a3.075 3.075 0 01-1.047-2.456 3.072 3.072 0 014.226.724l.057.08m-3 12.905l.321-.016A3.073 3.073 0 0015 15.031a3.071 3.071 0 00-.759-4.214l-.067-.048a3.075 3.075 0 01-1.048-2.456 3.072 3.072 0 014.214.759l.048.067" />
+                      </svg>
+                    </div>
+                    <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">
+                      Payroll & Attendance
+                    </h3>
+                    <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">
+                      Automate payroll calculations, track attendance, leaves, and generate salary reports effortlessly.
+                    </p>
+                  </div>
+
+                  {/* Card 4: Workflow Tracking */}
+                  <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                    <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.64a3 3 0 110-5.28 3 3 0 010 5.28zM6 10.64a3 3 0 110-5.28 3 3 0 010 5.28zM18 6.64a3 3 0 110-5.28 3 3 0 010 5.28z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.5 7.5l7-3.5m-7 5l7 3.5" />
+                      </svg>
+                    </div>
+                    <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">
+                      Workflow Tracking
+                    </h3>
+                    <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">
+                      Monitor tasks, approvals, and project workflows in real-time with visual tracking dashboards.
+                    </p>
+                  </div>
+
+                  {/* Card 5: Role-Based Access */}
+                  <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                    <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">
+                      Role-Based Access
+                    </h3>
+                    <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">
+                      Control data visibility and system access with granular role-based permission management.
+                    </p>
+                  </div>
+
+                  {/* Card 6: Reports & Analytics */}
+                  <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                    <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">
+                      Reports & Analytics
+                    </h3>
+                    <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">
+                      Generate detailed business reports and analytics to drive informed decision-making.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Page 3: ERP Advantages & Process */}
+            <section id="erp-page-3" className="w-full bg-[#010c17] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+              <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col justify-between items-center animate-fade-in">
+                {/* Upper Half: Business Benefits */}
+                <div className="flex flex-col items-center text-center mb-16">
+                  <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase">
+                    Advantages
+                  </span>
+                  <h2 className="font-serif text-[42px] sm:text-[52px] font-medium leading-[1.15] text-white tracking-tight">
+                    Business Benefits
+                  </h2>
+                </div>
+
+                {/* Grid for the 6 items */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl mb-36">
+                  {[
+                    "Centralized business operations",
+                    "Better team coordination",
+                    "Reduced manual work",
+                    "Faster decision-making",
+                    "Improved productivity",
+                    "Scalable system for business growth"
+                  ].map((benefit, i) => (
+                    <div 
+                      key={i} 
+                      className="border border-[#022e54]/80 bg-[#021627]/40 px-6 py-5 rounded-[18px] flex items-center gap-4 hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300"
+                    >
+                      {/* Checkmark outline SVG */}
+                      <svg className="w-6 h-6 text-[#539be2] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
+                      </svg>
+                      <span className="font-sans text-[16px] sm:text-[17px] font-medium text-slate-200">
+                        {benefit}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Lower Half: How We Work Process Timeline */}
+                <div className="flex flex-col items-center text-center mb-24">
+                  <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase">
+                    Process
+                  </span>
+                  <h2 className="font-serif text-[42px] sm:text-[52px] font-medium leading-[1.15] text-white tracking-tight">
+                    How We Work
+                  </h2>
+                </div>
+
+                {/* Timeline Flow Container */}
+                <div className="w-full relative max-w-5xl flex flex-col items-center">
+                  {/* Connection Line */}
+                  <div className="absolute top-[22px] left-[10%] right-[10%] h-[2px] bg-[#022e54]/60 z-0 hidden md:block" />
+
+                  {/* 5-Step timeline columns */}
+                  <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 w-full relative z-10">
+                    {[
+                      { step: 1, text: "Understand business workflow" },
+                      { step: 2, text: "Plan ERP modules" },
+                      { step: 3, text: "Design user-friendly dashboards" },
+                      { step: 4, text: "Develop and integrate system" },
+                      { step: 5, text: "Test, launch, and optimize" }
+                    ].map((item, idx) => (
+                      <div key={idx} className="flex flex-col items-center text-center space-y-6">
+                        {/* Step Number Circle Indicator */}
+                        <div className="w-11 h-11 rounded-full border border-[#539be2]/60 bg-[#010c17] flex items-center justify-center text-[#539be2] font-semibold text-[16px] shadow-[0_0_15px_rgba(83,155,226,0.15)] select-none">
+                          {item.step}
+                        </div>
+
+                        {/* Text Pill Box */}
+                        <div className="w-full border border-[#022e54]/80 bg-[#021627]/40 px-4 py-4 rounded-[18px] min-h-[96px] flex items-center justify-center hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300">
+                          <p className="font-sans text-[13px] sm:text-[14px] leading-relaxed font-medium text-slate-200">
+                            {item.text}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* CTA Section - Get In Touch */}
+            <section className="w-full bg-white text-slate-900 py-24 md:py-32 flex flex-col items-center">
+              <div className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center">
+                <span className="text-[15px] font-semibold tracking-wide text-slate-500 mb-5 uppercase font-sans">
+                  Get In Touch
+                </span>
+                
+                <h2 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-medium leading-[1.15] text-slate-900 tracking-tight mb-6 max-w-3xl">
+                  Ready to transform <br />
+                  your business <br />
+                  <span className="text-[#1b5ea3] font-medium">digitally?</span>
+                </h2>
+                
+                <p className="font-sans text-[16px] sm:text-[17px] leading-relaxed text-slate-500 max-w-2xl mb-10">
+                  Let us architect the digital infrastructure your business deserves.
+                </p>
+                
+                <button 
+                  onClick={() => navigateToContact(2)}
+                  className="bg-black hover:bg-slate-900 text-white px-9 py-4 rounded-full text-[15px] font-semibold flex items-center gap-2.5 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-md"
+                >
+                  Let's Talk
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+            </section>
+          </>
+        )}
+
+        {view === 'automation' && (
+          <>
+            {/* Automation Page 1: Hero */}
+            <section id="automation" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between">
+              {/* Desktop split layout */}
+              <div className="absolute inset-0 hidden lg:grid lg:grid-cols-2">
+                <div className="bg-[#07080a] w-full h-full"></div>
+                <div className="bg-[#07080a] w-full h-full relative overflow-hidden flex items-center justify-center p-12">
+                  <div className="absolute inset-0 bg-[#07080a] mix-blend-overlay z-10"></div>
+                  <div className="relative z-0 w-full max-w-lg aspect-square rounded-[40px] overflow-hidden shadow-[0_0_80px_rgba(83,155,226,0.15)] ring-1 ring-[#539be2]/20 group">
+                    <img 
+                      src={automationImg} 
+                      alt="Business Automation" 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-[#021627]/60 to-transparent"></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Text Content */}
+              <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-32 flex flex-col items-start lg:w-1/2">
+                <span className="font-sans text-[14px] font-semibold tracking-widest text-[#539be2] uppercase mb-4">
+                  Galletrix Service
+                </span>
+                <h1 className="font-serif text-[48px] sm:text-[56px] md:text-[68px] font-medium leading-[1.12] text-white tracking-tight mb-8">
+                  Business Automation
+                </h1>
+                <p className="font-sans text-[20px] md:text-[22px] font-medium text-[#539be2] leading-snug mb-6 max-w-lg">
+                  Automate workflows and save time.
+                </p>
+                <p className="font-sans text-[16px] sm:text-[17px] leading-[1.7] text-slate-300 max-w-md mb-12">
+                  Galletrix helps businesses reduce repetitive manual tasks through smart automation systems that improve speed, accuracy, and productivity.
+                </p>
+              </div>
+
+              {/* Mobile Block Image */}
+              <div className="w-full lg:hidden bg-[#07080a] py-12 px-6">
+                <div className="w-full aspect-square rounded-[32px] overflow-hidden shadow-[0_0_60px_rgba(83,155,226,0.15)] ring-1 ring-[#539be2]/20 relative">
+                  <img 
+                    src={automationImg} 
+                    alt="Business Automation" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#021627]/60 to-transparent"></div>
+                </div>
+              </div>
+            </section>
+
+            {/* Automation Page 2: Overview & Key Features */}
+            <section id="automation-page-2" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 flex flex-col items-center">
+              <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col items-center animate-fade-in">
+                
+                {/* Upper Half: Overview */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-32">
+                  <div className="lg:col-span-4 flex flex-col">
+                    <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase">
+                      Overview
+                    </span>
+                    <h2 className="font-serif text-[42px] sm:text-[48px] font-medium leading-[1.15] text-white tracking-tight">
+                      What We <span className="text-[#1b5ea3]">Deliver</span>
+                    </h2>
+                  </div>
+                  <div className="lg:col-span-8 flex items-center">
+                    <p className="font-sans text-[16px] sm:text-[18px] leading-[1.8] text-slate-300">
+                      Business automation helps companies simplify daily operations, reduce human errors, automate approvals, trigger notifications, and improve workflow efficiency. By replacing manual processes with intelligent automation, teams can focus on high-value work while systems handle routine tasks with precision and reliability.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Lower Half: Key Features Grid */}
+                <div className="flex flex-col items-center text-center w-full mb-16">
+                  <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase">
+                    Capabilities
+                  </span>
+                  <h2 className="font-serif text-[42px] sm:text-[52px] font-medium leading-[1.15] text-white tracking-tight mb-20">
+                    Key Features
+                  </h2>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+                    {/* Card 1: Workflow Automation */}
+                    <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                      <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
+                      </div>
+                      <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">Workflow Automation</h3>
+                      <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">Automate complex business workflows with intelligent triggers, conditions, and actions.</p>
+                    </div>
+                    {/* Card 2: Task Automation */}
+                    <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                      <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      </div>
+                      <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">Task Automation</h3>
+                      <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">Eliminate repetitive manual tasks and let smart systems handle routine operations.</p>
+                    </div>
+                    {/* Card 3: Approval Flows */}
+                    <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                      <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                      </div>
+                      <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">Approval Flows</h3>
+                      <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">Streamline multi-level approval processes with automated routing and notifications.</p>
+                    </div>
+                    {/* Card 4: Smart Notifications */}
+                    <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                      <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                      </div>
+                      <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">Smart Notifications</h3>
+                      <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">Trigger automated alerts and notifications based on business events and deadlines.</p>
+                    </div>
+                    {/* Card 5: Process Tracking */}
+                    <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                      <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                      </div>
+                      <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">Process Tracking</h3>
+                      <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">Monitor automated processes in real-time with detailed logs and performance metrics.</p>
+                    </div>
+                    {/* Card 6: Automated Reports */}
+                    <div className="border border-[#022e54]/80 bg-[#021627]/40 p-8 rounded-[24px] flex flex-col justify-start text-left items-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300 hover:scale-[1.01]">
+                      <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] mb-6">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                      </div>
+                      <h3 className="font-sans text-[19px] sm:text-[21px] font-semibold text-white tracking-tight mb-3">Automated Reports</h3>
+                      <p className="font-sans text-[14px] sm:text-[15px] leading-relaxed text-slate-400">Generate and distribute business reports automatically on schedule or by trigger.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Automation Page 3: Business Benefits & Process */}
+            <section id="automation-page-3" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+              <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col justify-between items-center animate-fade-in">
+                {/* Upper Half: Business Benefits */}
+                <div className="flex flex-col items-center text-center mb-16 w-full">
+                  <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase">
+                    Advantages
+                  </span>
+                  <h2 className="font-serif text-[42px] sm:text-[52px] font-medium leading-[1.15] text-white tracking-tight mb-16">
+                    Business Benefits
+                  </h2>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl mb-36">
+                    {[
+                      "Less manual work",
+                      "Faster approvals",
+                      "Reduced errors",
+                      "Improved productivity",
+                      "Better process visibility",
+                      "More efficient team operations"
+                    ].map((benefit, i) => (
+                      <div key={i} className="border border-[#022e54]/80 bg-[#021627]/40 px-6 py-5 rounded-[18px] flex items-center gap-4 hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300">
+                        <svg className="w-6 h-6 text-[#539be2] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" /></svg>
+                        <span className="font-sans text-[16px] sm:text-[17px] font-medium text-slate-200">{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Lower Half: How We Work Timeline */}
+                <div className="flex flex-col items-center text-center mb-24 w-full">
+                  <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase">
+                    Process
+                  </span>
+                  <h2 className="font-serif text-[42px] sm:text-[52px] font-medium leading-[1.15] text-white tracking-tight">
+                    How We Work
+                  </h2>
+                </div>
+
+                <div className="w-full relative max-w-5xl flex flex-col items-center">
+                  <div className="absolute top-[22px] left-[10%] right-[10%] h-[2px] bg-[#022e54]/60 z-0 hidden md:block" />
+                  <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4 w-full relative z-10">
+                    {[
+                      { step: 1, text: "Identify repetitive tasks" },
+                      { step: 2, text: "Map business workflows" },
+                      { step: 3, text: "Create automation logic" },
+                      { step: 4, text: "Build and integrate automation system" },
+                      { step: 5, text: "Monitor and improve performance" }
+                    ].map((item, idx) => (
+                      <div key={idx} className="flex flex-col items-center text-center space-y-6">
+                        <div className="w-11 h-11 rounded-full border border-[#539be2]/60 bg-[#07080a] flex items-center justify-center text-[#539be2] font-semibold text-[16px] shadow-[0_0_15px_rgba(83,155,226,0.15)] select-none">
+                          {item.step}
+                        </div>
+                        <div className="w-full border border-[#022e54]/80 bg-[#021627]/40 px-4 py-4 rounded-[18px] min-h-[96px] flex items-center justify-center hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300">
+                          <p className="font-sans text-[13px] sm:text-[14px] leading-relaxed font-medium text-slate-200">
+                            {item.text}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Automation Page 4: Get In Touch */}
+            <section className="w-full bg-white text-slate-900 py-24 md:py-32 flex flex-col items-center">
+              <div className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center">
+                <span className="text-[15px] font-semibold tracking-wide text-slate-500 mb-5 uppercase font-sans">
+                  Get In Touch
+                </span>
+                <h2 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-medium leading-[1.15] text-slate-900 tracking-tight mb-6 max-w-3xl">
+                  Ready to transform <br />
+                  your business <br />
+                  <span className="text-[#1b5ea3] font-medium">digitally?</span>
+                </h2>
+                <p className="font-sans text-[16px] sm:text-[17px] leading-relaxed text-slate-500 max-w-2xl mb-10">
+                  Let us architect the digital infrastructure your business deserves.
+                </p>
+                <button onClick={() => navigateToContact(1)} className="bg-[#1b5ea3] hover:bg-blue-800 text-white px-9 py-4 rounded-full text-[15px] font-semibold flex items-center gap-2.5 transition-colors cursor-pointer shadow-md">
+                  Contact Us
+                  <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+            </section>
+          </>
+        )}
+
+        {view === 'careers' && (
+          <>
+            {/* Careers Section with desktop background image overlay */}
+            <section id="careers" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between">
+              {/* Desktop Background Image */}
+              <div className="absolute inset-0 hidden lg:block">
+                <img 
+                  src={careersImg} 
+                  alt="Galletrix Careers" 
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+
+              {/* Text Content */}
+              <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-28 flex flex-col items-start">
+                {/* Subtitle */}
+                <span className="text-[15px] font-medium tracking-wide text-slate-400 mb-5">
+                  Careers at Galletrix
+                </span>
+
+                {/* Heading */}
+                <h1 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-medium leading-[1.12] text-white tracking-tight mb-8 max-w-4xl">
+                  Join Our Team
+                </h1>
+
+                {/* Description */}
+                <p className="font-sans text-[16px] sm:text-[18px] md:text-[19px] leading-[1.65] text-slate-400 max-w-3xl mb-14">
+                  We are looking for passionate individuals to help us build intelligent digital solutions. Explore our open positions and find where you fit in.
+                </p>
+              </div>
+
+              {/* Mobile Block Image */}
+              <div className="w-full lg:hidden">
+                <img 
+                  src={careersImg} 
+                  alt="Galletrix Careers" 
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </section>
+
+            {/* Careers Page 2: Why Work With Us Section */}
+            <section id="careers-page-2" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+              <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col items-center">
+                
+                {/* Subtitle & Heading */}
+                <div className="w-full text-left mb-20 animate-fade-in">
+                  <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase block">
+                    Benefits
+                  </span>
+                  <h2 className="font-serif text-[42px] sm:text-[52px] font-medium leading-[1.15] text-white tracking-tight">
+                    Why Work With Us
+                  </h2>
+                </div>
+
+                {/* 4-Column Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-12 w-full animate-fade-in">
+                  {/* Item 1 */}
+                  <div className="flex flex-col text-left">
+                    <h3 className="font-sans text-[18px] sm:text-[20px] font-semibold text-white tracking-tight mb-4">Real World Projects</h3>
+                    <p className="font-sans text-[15px] leading-relaxed text-slate-400">
+                      Work on impactful products, from enterprise CRM to internal dashboards.
+                    </p>
+                  </div>
+                  {/* Item 2 */}
+                  <div className="flex flex-col text-left">
+                    <h3 className="font-sans text-[18px] sm:text-[20px] font-semibold text-white tracking-tight mb-4">Learning Culture</h3>
+                    <p className="font-sans text-[15px] leading-relaxed text-slate-400">
+                      Improve your skills through mentorship, workshops, and courses.
+                    </p>
+                  </div>
+                  {/* Item 3 */}
+                  <div className="flex flex-col text-left">
+                    <h3 className="font-sans text-[18px] sm:text-[20px] font-semibold text-white tracking-tight mb-4">Creative Environment</h3>
+                    <p className="font-sans text-[15px] leading-relaxed text-slate-400">
+                      Bring ideas to life through design, development, and innovation without limits.
+                    </p>
+                  </div>
+                  {/* Item 4 */}
+                  <div className="flex flex-col text-left">
+                    <h3 className="font-sans text-[18px] sm:text-[20px] font-semibold text-white tracking-tight mb-4">Growth Opportunities</h3>
+                    <p className="font-sans text-[15px] leading-relaxed text-slate-400">
+                      Build your career with projects that challenge, stretch, and develop your expertise.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Careers Page 3: Life at Galletrix */}
+            <section id="careers-page-3" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+              <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-20 animate-fade-in">
+                {/* Left Column */}
+                <div className="flex flex-col justify-center">
+                  <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase">
+                    Culture
+                  </span>
+                  <h2 className="font-serif text-[42px] sm:text-[52px] font-medium leading-[1.15] text-white tracking-tight mb-8">
+                    Life at Galletrix
+                  </h2>
+                  <p className="font-sans text-[18px] sm:text-[19px] leading-[1.6] text-white font-medium mb-6 max-w-lg">
+                    Collaboration, creativity, and continuous learning.
+                  </p>
+                  <p className="font-sans text-[15px] leading-relaxed text-slate-400 max-w-lg">
+                    We believe in building meaningful digital products through teamwork, problem-solving, and continuous improvement. Our team works together to create solutions that are simple, scalable, and business focused.
+                  </p>
+                </div>
+
+                {/* Right Column: Pill Cards */}
+                <div className="flex flex-col justify-center gap-6">
+                  {/* Card 1 */}
+                  <div className="border border-[#022e54]/80 bg-[#021627]/40 p-6 rounded-[24px] flex items-center gap-6 hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] shrink-0">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                      </svg>
+                    </div>
+                    <span className="font-sans text-[17px] sm:text-[18px] font-semibold text-white tracking-tight">Collaborative Team</span>
+                  </div>
+                  {/* Card 2 */}
+                  <div className="border border-[#022e54]/80 bg-[#021627]/40 p-6 rounded-[24px] flex items-center gap-6 hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] shrink-0">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                    </div>
+                    <span className="font-sans text-[17px] sm:text-[18px] font-semibold text-white tracking-tight">Modern Work Culture</span>
+                  </div>
+                  {/* Card 3 */}
+                  <div className="border border-[#022e54]/80 bg-[#021627]/40 p-6 rounded-[24px] flex items-center gap-6 hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-[14px] bg-[#02223c]/60 flex items-center justify-center text-[#539be2] shrink-0">
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+                    <span className="font-sans text-[17px] sm:text-[18px] font-semibold text-white tracking-tight">Innovation Focused Mindset</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Careers Page 4: Hiring Process Timeline */}
+            <section id="careers-page-4" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+              <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col justify-between items-center animate-fade-in">
+                {/* Upper Half: Timeline Heading */}
+                <div className="flex flex-col items-center text-center mb-24">
+                  <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase">
+                    Hiring Process
+                  </span>
+                  <h2 className="font-serif text-[42px] sm:text-[52px] font-medium leading-[1.15] text-white tracking-tight">
+                    What We Look For
+                  </h2>
+                </div>
+
+                {/* Timeline Flow Container */}
+                <div className="w-full relative max-w-5xl flex flex-col items-center mb-36">
+                  {/* Connection Line */}
+                  <div className="absolute top-[22px] left-[12.5%] right-[12.5%] h-[2px] bg-[#022e54]/60 z-0 hidden md:block" />
+
+                  {/* 4-Step timeline columns */}
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-4 w-full relative z-10">
+                    {[
+                      { step: 1, title: "Apply Online", text: "Submit your resume and portfolio through our online application form." },
+                      { step: 2, title: "Initial Review", text: "Our team reviews your skills, experience, and fit for the role." },
+                      { step: 3, title: "Interview", text: "We connect with you to understand your goals, skills, and personality." },
+                      { step: 4, title: "Join the Team", text: "Start working on exciting products and projects with impact." }
+                    ].map((item, idx) => (
+                      <div key={idx} className="flex flex-col items-center text-center space-y-6">
+                        {/* Step Number Circle Indicator */}
+                        <div className="w-11 h-11 rounded-full border border-[#539be2]/60 bg-[#07080a] flex items-center justify-center text-[#539be2] font-semibold text-[16px] shadow-[0_0_15px_rgba(83,155,226,0.15)] select-none">
+                          {item.step}
+                        </div>
+
+                        {/* Text Pill Box */}
+                        <div className="w-full border border-[#022e54]/80 bg-[#021627]/40 px-5 py-6 rounded-[18px] min-h-[140px] flex flex-col items-center justify-start hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300">
+                          <h4 className="font-sans text-[16px] sm:text-[17px] font-semibold text-white tracking-tight mb-2">
+                            {item.title}
+                          </h4>
+                          <p className="font-sans text-[13px] sm:text-[14px] leading-relaxed font-medium text-slate-300">
+                            {item.text}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Lower Half: What We Value Grid */}
+                <div className="flex flex-col items-center text-center mb-16 w-full">
+                  <span className="font-sans text-[15px] font-semibold tracking-wide text-slate-400 mb-4 uppercase">
+                    What We Value
+                  </span>
+                  <h2 className="font-serif text-[42px] sm:text-[52px] font-medium leading-[1.15] text-white tracking-tight mb-16">
+                    What We Look For
+                  </h2>
+
+                  {/* Grid for the 6 items */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl mb-24">
+                    {[
+                      "Problem-solving Mindset",
+                      "Willingness to Learn",
+                      "Team Collaboration",
+                      "Creative Thinking",
+                      "Attention to Detail",
+                      "Interest in Technology"
+                    ].map((value, i) => (
+                      <div 
+                        key={i} 
+                        className="border border-[#022e54]/80 bg-[#021627]/40 px-6 py-5 rounded-[18px] flex items-center gap-4 hover:border-blue-800/40 hover:bg-[#021627]/60 transition-all duration-300"
+                      >
+                        {/* Checkmark outline SVG */}
+                        <svg className="w-6 h-6 text-[#539be2] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                          <circle cx="12" cy="12" r="10" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75" />
+                        </svg>
+                        <span className="font-sans text-[16px] sm:text-[17px] font-medium text-slate-200">
+                          {value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Apply Now Button */}
+                  <button 
+                    onClick={() => navigateToContact(2)}
+                    className="bg-[#e2942b] hover:bg-[#cc6f2a] text-white px-16 py-4 rounded-full text-[15px] font-semibold flex items-center justify-center transition-colors cursor-pointer shadow-lg w-full max-w-sm"
+                  >
+                    Apply Now
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* CTA Section - Get In Touch */}
+            <section className="w-full bg-white text-slate-900 py-24 md:py-32 flex flex-col items-center">
+              <div className="max-w-4xl mx-auto px-6 flex flex-col items-center text-center">
+                <span className="text-[15px] font-semibold tracking-wide text-slate-500 mb-5 uppercase font-sans">
+                  Get In Touch
+                </span>
+                
+                <h2 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-medium leading-[1.15] text-slate-900 tracking-tight mb-6 max-w-3xl">
+                  Ready to transform <br />
+                  your career <br />
+                  <span className="text-[#1b5ea3] font-medium">with us?</span>
+                </h2>
+                
+                <p className="font-sans text-[16px] sm:text-[17px] leading-relaxed text-slate-500 max-w-2xl mb-10">
+                  Let us help you build a rewarding career at Galletrix.
+                </p>
+                
+                <button 
+                  onClick={() => navigateToContact(1)}
+                  className="bg-[#1b5ea3] hover:bg-blue-800 text-white px-9 py-4 rounded-full text-[15px] font-semibold flex items-center gap-2.5 transition-colors cursor-pointer shadow-md"
+                >
+                  Contact Us
                   <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
@@ -1811,7 +2757,11 @@ function App() {
                 {/* Cards Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
                   {/* Card 1: ERP Solutions */}
-                  <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
+                  <a 
+                    href="#erp"
+                    onClick={() => setView('erp')}
+                    className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 hover:scale-[1.01] transition-all duration-300 text-left cursor-pointer"
+                  >
                     <div className="text-slate-300 mb-6">
                       <svg className="w-6 h-6 text-slate-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4 7c0-1.657 3.582-3 8-3s8 1.343 8 3M4 7c0 1.657 3.582 3 8 3s8-1.343 8-3M4 7v10c0 1.657 3.582 3 8 3s8-1.343 8-3V7M4 12c0 1.657 3.582 3 8 3s8-1.343 8-3" />
@@ -1823,7 +2773,7 @@ function App() {
                     <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
                       Unified enterprise resource planning systems that integrate every facet of your operations into a single, intelligent platform.
                     </p>
-                  </div>
+                  </a>
 
                   {/* Card 2: Business Automation */}
                   <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
