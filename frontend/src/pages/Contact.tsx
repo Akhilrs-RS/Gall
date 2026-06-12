@@ -9,7 +9,7 @@ const Contact: React.FC<ContactProps> = () => {
   return (
     <>
       {/* Page 1: Contact Hero / Let's Build Together Section */}
-      <section id="contact-page-1" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between min-h-[calc(100vh-6rem)] lg:min-h-0">
+      <section id="contact-page-1" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between lg:justify-center min-h-[calc(100vh-6rem)] lg:min-h-0">
         {/* Desktop Background Image */}
         <div className="absolute inset-0 hidden lg:block">
           <img 
@@ -20,14 +20,14 @@ const Contact: React.FC<ContactProps> = () => {
         </div>
 
         {/* Text Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-28 flex flex-col items-start">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 lg:pt-0 flex flex-col items-start">
           {/* Subtitle */}
           <span className="text-[15px] font-medium tracking-wide text-slate-400 mb-5">
             Contact Galletrix
           </span>
 
           {/* Heading */}
-          <h1 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-medium leading-[1.12] text-white tracking-tight mb-8 max-w-4xl">
+          <h1 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-bold leading-[1.12] text-white tracking-tight mb-8 max-w-4xl">
             Let's Build Together
           </h1>
 

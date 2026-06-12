@@ -10,7 +10,7 @@ const About: React.FC<AboutProps> = ({ navigateToContact }) => {
   return (
     <>
       {/* About Section with desktop background image overlay */}
-      <section id="about" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between">
+      <section id="about" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between lg:justify-center">
         {/* Desktop Background Image */}
         <div className="absolute inset-0 hidden lg:block">
           <img 
@@ -21,14 +21,14 @@ const About: React.FC<AboutProps> = ({ navigateToContact }) => {
         </div>
 
         {/* Text Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-28 flex flex-col items-start">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 lg:pt-0 flex flex-col items-start">
           {/* Subtitle */}
           <span className="text-[15px] font-medium tracking-wide text-slate-400 mb-5">
             About Galletrix
           </span>
 
           {/* Heading */}
-          <h1 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-medium leading-[1.12] text-white tracking-tight mb-8 max-w-4xl">
+          <h1 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-bold leading-[1.12] text-white tracking-tight mb-8 max-w-4xl">
             Building Intelligent Digital Solutions
           </h1>
 
@@ -66,7 +66,7 @@ const About: React.FC<AboutProps> = ({ navigateToContact }) => {
               Our Story
             </span>
             
-            <h2 className="font-serif text-[38px] sm:text-[48px] md:text-[56px] font-medium leading-[1.15] text-white tracking-tight mb-8">
+            <h2 className="font-serif text-[38px] sm:text-[48px] md:text-[56px] font-bold leading-[1.15] text-white tracking-tight mb-8">
               Built to simplify,<br />engineered to scale.
             </h2>
 
@@ -93,7 +93,7 @@ const About: React.FC<AboutProps> = ({ navigateToContact }) => {
             <span className="font-sans text-[15px] font-medium tracking-wide text-slate-400 mb-5">
               Why Clients Choose Us
             </span>
-            <h2 className="font-serif text-[38px] sm:text-[48px] md:text-[56px] font-medium leading-[1.15] text-white tracking-tight">
+            <h2 className="font-serif text-[38px] sm:text-[48px] md:text-[56px] font-bold leading-[1.15] text-white tracking-tight">
               Trust Built Through Results
             </h2>
           </div>
@@ -102,7 +102,7 @@ const About: React.FC<AboutProps> = ({ navigateToContact }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {/* Card 1: Proven Track Record */}
             <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
-              <h3 className="font-serif text-[20px] md:text-[22px] font-medium text-white tracking-tight mb-5">
+              <h3 className="font-serif text-[20px] md:text-[22px] font-bold text-white tracking-tight mb-5">
                 Proven Track Record
               </h3>
               <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
@@ -112,7 +112,7 @@ const About: React.FC<AboutProps> = ({ navigateToContact }) => {
 
             {/* Card 2: Enterprise Security */}
             <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
-              <h3 className="font-serif text-[20px] md:text-[22px] font-medium text-white tracking-tight mb-5">
+              <h3 className="font-serif text-[20px] md:text-[22px] font-bold text-white tracking-tight mb-5">
                 Enterprise Security
               </h3>
               <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
@@ -122,7 +122,7 @@ const About: React.FC<AboutProps> = ({ navigateToContact }) => {
 
             {/* Card 3: Long-term Partnership */}
             <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
-              <h3 className="font-serif text-[20px] md:text-[22px] font-medium text-white tracking-tight mb-5">
+              <h3 className="font-serif text-[20px] md:text-[22px] font-bold text-white tracking-tight mb-5">
                 Long-term Partnership
               </h3>
               <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">

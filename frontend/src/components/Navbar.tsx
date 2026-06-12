@@ -9,8 +9,28 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ view, setView, navigateToContact }) => {
+  const [isScrolled, setIsScrolled] = React.useState(false)
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <header className="w-full bg-[#07080a]/90 backdrop-blur-md border-b border-slate-900 sticky top-0 z-50">
+    <header className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled 
+        ? 'bg-[#07080a]/80 backdrop-blur-md border-b border-slate-900/80 shadow-lg' 
+        : 'bg-transparent border-b border-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-24 flex items-center justify-between">
         
         {/* Logo */}
@@ -184,6 +204,16 @@ const Navbar: React.FC<NavbarProps> = ({ view, setView, navigateToContact }) => 
               </div>
             </div>
           </div>
+
+          <a 
+            href="#about" 
+            onClick={() => setView('about')}
+            className={`text-[15px] font-medium transition-colors duration-200 ${
+              view === 'about' ? 'text-[#cc6f2a]' : 'text-slate-300 hover:text-white'
+            }`}
+          >
+            About
+          </a>
 
           <a 
             href="#industry" 

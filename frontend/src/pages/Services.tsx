@@ -11,7 +11,7 @@ const Services: React.FC<ServicesProps> = ({ setView, navigateToContact }) => {
   return (
     <>
       {/* Services Section with desktop background image overlay */}
-      <section id="services" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between min-h-[calc(100vh-6rem)] lg:min-h-0 animate-fade-in">
+      <section id="services" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between lg:justify-center min-h-[calc(100vh-6rem)] lg:min-h-0 animate-fade-in">
         {/* Desktop Background Image */}
         <div className="absolute inset-0 hidden lg:block">
           <img 
@@ -22,14 +22,14 @@ const Services: React.FC<ServicesProps> = ({ setView, navigateToContact }) => {
         </div>
 
         {/* Text Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-28 flex flex-col items-start">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 lg:pt-0 flex flex-col items-start">
           {/* Subtitle */}
           <span className="text-[15px] font-medium tracking-wide text-slate-400 mb-5">
             Our Services
           </span>
 
           {/* Heading */}
-          <h1 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-medium leading-[1.12] text-white tracking-tight mb-8 max-w-4xl">
+          <h1 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-bold leading-[1.12] text-white tracking-tight mb-8 max-w-4xl">
             Precision-Engineered Digital Solutions
           </h1>
 
@@ -50,8 +50,8 @@ const Services: React.FC<ServicesProps> = ({ setView, navigateToContact }) => {
       </section>
 
       {/* Page 2: Services Cards Grid Section */}
-      <section id="services-page-2" className="w-full bg-[#07080a] py-24 md:py-32 border-t border-slate-900/60 min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col justify-between h-full animate-fade-in">
+      <section id="services-page-2" className="w-full bg-[#07080a] pt-16 pb-12 md:pt-24 md:pb-16 border-t border-slate-900/60">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full animate-fade-in">
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {/* Card 1: ERP Solutions */}
@@ -153,7 +153,7 @@ const Services: React.FC<ServicesProps> = ({ setView, navigateToContact }) => {
       </section>
 
       {/* Page 3: How We Work Section */}
-      <section id="services-page-3" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+      <section id="services-page-3" className="w-full bg-[#07080a] pt-12 pb-24 md:pt-16 md:pb-32 lg:pt-20 lg:pb-40 border-t border-slate-900/60">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col items-start animate-fade-in">
           {/* Subtitle */}
           <span className="font-sans text-[15px] font-medium tracking-wide text-slate-400 mb-5">

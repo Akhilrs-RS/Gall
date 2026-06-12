@@ -27,7 +27,7 @@ const Web: React.FC<WebProps> = ({ navigateToContact }) => {
         </div>
 
         {/* Text Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-32 flex flex-col items-start lg:w-1/2">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 md:pt-32 flex flex-col items-start lg:w-1/2">
           <span className="font-sans text-[14px] font-semibold tracking-widest text-[#539be2] uppercase mb-4">
             Galletrix Service
           </span>

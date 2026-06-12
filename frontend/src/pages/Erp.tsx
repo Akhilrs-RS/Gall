@@ -9,7 +9,7 @@ const Erp: React.FC<ErpProps> = ({ navigateToContact }) => {
   return (
     <>
       {/* ERP Solutions Page */}
-      <section id="erp" className="w-full bg-[#07080a] min-h-[calc(100vh-6rem)] flex items-center py-20 md:py-28 animate-fade-in">
+      <section id="erp" className="w-full bg-[#07080a] min-h-[calc(100vh-6rem)] flex items-center pt-28 pb-20 md:pt-36 md:pb-28 animate-fade-in">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Text */}
           <div className="lg:col-span-7 flex flex-col items-start text-left">

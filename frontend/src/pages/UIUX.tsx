@@ -20,7 +20,7 @@ const UIUX: React.FC<UIUXProps> = ({ navigateToContact }) => {
             </div>
           </div>
         </div>
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-20 md:pt-32 flex flex-col items-start lg:w-1/2">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 md:pt-32 flex flex-col items-start lg:w-1/2">
           <span className="font-sans text-[14px] font-semibold tracking-widest text-[#539be2] uppercase mb-4">Galletrix Service</span>
           <h1 className="font-serif text-[48px] sm:text-[56px] md:text-[68px] font-medium leading-[1.12] text-white tracking-tight mb-8">UI/UX Design</h1>
           <p className="font-sans text-[20px] md:text-[22px] font-medium text-[#539be2] leading-snug mb-6 max-w-lg">Design better user experiences.</p>
