@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import aboutImg from '../assets/about.png'
 import aboutStoryImg from '../assets/a2.png'
 
@@ -7,6 +7,32 @@ interface AboutProps {
 }
 
 const About: React.FC<AboutProps> = ({ navigateToContact }) => {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          observer.unobserve(entry.target)
+        }
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the section is visible
+      }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [])
   return (
     <>
       {/* About Section with desktop background image overlay */}
@@ -49,10 +75,16 @@ const About: React.FC<AboutProps> = ({ navigateToContact }) => {
       </section>
 
       {/* Our Story Section */}
-      <section id="about-story" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 flex flex-col items-center">
+      <section 
+        id="about-story" 
+        ref={sectionRef} 
+        className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 flex flex-col items-center overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          {/* Left Column: Image */}
-          <div className="lg:col-span-6 w-full">
+          {/* Left Column: Image (Slides up from down to top) */}
+          <div className={`lg:col-span-6 w-full transition-all duration-1000 delay-100 ease-out transform ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0'
+          }`}>
             <img 
               src={aboutStoryImg} 
               alt="Our Story - Built to simplify, engineered to scale" 
@@ -60,8 +92,10 @@ const About: React.FC<AboutProps> = ({ navigateToContact }) => {
             />
           </div>
 
-          {/* Right Column: Text Content */}
-          <div className="lg:col-span-6 flex flex-col items-start lg:pl-6">
+          {/* Right Column: Text Content (Slides up from down to top, slightly staggered) */}
+          <div className={`lg:col-span-6 flex flex-col items-start lg:pl-6 transition-all duration-1000 delay-300 ease-out transform ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-24 opacity-0'
+          }`}>
             <span className="font-sans text-[15px] font-medium tracking-wide text-slate-400 mb-5">
               Our Story
             </span>

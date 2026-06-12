@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import contactImg from '../assets/contact.png'
 
 interface ContactProps {
@@ -6,6 +6,57 @@ interface ContactProps {
 }
 
 const Contact: React.FC<ContactProps> = () => {
+  const [fullName, setFullName] = useState('')
+  const [company, setCompany] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [serviceOfInterest, setServiceOfInterest] = useState('')
+  const [message, setMessage] = useState('')
+
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setStatus('submitting')
+    setErrorMessage('')
+
+    try {
+      const response = await fetch('http://localhost:5252/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          fullName,
+          company: company || null,
+          email,
+          phone: phone || null,
+          serviceOfInterest: serviceOfInterest || null,
+          message
+        })
+      })
+
+      if (response.ok) {
+        setStatus('success')
+        setFullName('')
+        setCompany('')
+        setEmail('')
+        setPhone('')
+        setServiceOfInterest('')
+        setMessage('')
+      } else {
+        const errorData = await response.json().catch(() => null)
+        setStatus('error')
+        setErrorMessage(errorData?.message || 'Failed to send message. Please try again.')
+      }
+    } catch (err) {
+      console.error(err)
+      setStatus('error')
+      setErrorMessage('A network error occurred. Please check if the backend is running.')
+    }
+  }
+
   return (
     <>
       {/* Page 1: Contact Hero / Let's Build Together Section */}
@@ -125,15 +176,18 @@ const Contact: React.FC<ContactProps> = () => {
             <h2 className="font-serif text-[28px] md:text-[34px] font-medium text-white">
               Send US a Message
             </h2>
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="block text-[14px] font-medium text-slate-300">Full Name *</label>
                   <input 
                     type="text" 
                     placeholder="John Smith" 
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
                     className="w-full bg-[#0a0c10] border border-slate-800 rounded-xl px-5 py-4 text-[15px] text-white placeholder-slate-600 focus:outline-none focus:border-[#0091ff] focus:ring-1 focus:ring-[#0091ff] transition-all" 
                     required 
+                    disabled={status === 'submitting'}
                   />
                 </div>
                 <div className="space-y-2">
@@ -141,7 +195,10 @@ const Contact: React.FC<ContactProps> = () => {
                   <input 
                     type="text" 
                     placeholder="Your Company" 
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
                     className="w-full bg-[#0a0c10] border border-slate-800 rounded-xl px-5 py-4 text-[15px] text-white placeholder-slate-600 focus:outline-none focus:border-[#0091ff] focus:ring-1 focus:ring-[#0091ff] transition-all" 
+                    disabled={status === 'submitting'}
                   />
                 </div>
                 <div className="space-y-2">
@@ -149,8 +206,11 @@ const Contact: React.FC<ContactProps> = () => {
                   <input 
                     type="email" 
                     placeholder="you@company.com" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full bg-[#0a0c10] border border-slate-800 rounded-xl px-5 py-4 text-[15px] text-white placeholder-slate-600 focus:outline-none focus:border-[#0091ff] focus:ring-1 focus:ring-[#0091ff] transition-all" 
                     required 
+                    disabled={status === 'submitting'}
                   />
                 </div>
                 <div className="space-y-2">
@@ -158,7 +218,10 @@ const Contact: React.FC<ContactProps> = () => {
                   <input 
                     type="tel" 
                     placeholder="+1(555)000-0000" 
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
                     className="w-full bg-[#0a0c10] border border-slate-800 rounded-xl px-5 py-4 text-[15px] text-white placeholder-slate-600 focus:outline-none focus:border-[#0091ff] focus:ring-1 focus:ring-[#0091ff] transition-all" 
+                    disabled={status === 'submitting'}
                   />
                 </div>
               </div>
@@ -166,7 +229,12 @@ const Contact: React.FC<ContactProps> = () => {
               <div className="space-y-2">
                 <label className="block text-[14px] font-medium text-slate-400">Service of Interest</label>
                 <div className="relative">
-                  <select className="w-full bg-[#0a0c10] border border-slate-800 rounded-xl px-5 py-4 text-[15px] text-slate-300 focus:outline-none focus:border-[#0091ff] focus:ring-1 focus:ring-[#0091ff] transition-all appearance-none cursor-pointer">
+                  <select 
+                    value={serviceOfInterest}
+                    onChange={(e) => setServiceOfInterest(e.target.value)}
+                    className="w-full bg-[#0a0c10] border border-slate-800 rounded-xl px-5 py-4 text-[15px] text-slate-300 focus:outline-none focus:border-[#0091ff] focus:ring-1 focus:ring-[#0091ff] transition-all appearance-none cursor-pointer"
+                    disabled={status === 'submitting'}
+                  >
                     <option value="">Select a service......</option>
                     <option value="erp">ERP Systems</option>
                     <option value="automation">Automation & AI</option>
@@ -186,13 +254,32 @@ const Contact: React.FC<ContactProps> = () => {
                 <textarea 
                   rows={6} 
                   placeholder="Tell us about your projects, goals and challenges............." 
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="w-full bg-[#0a0c10] border border-slate-800 rounded-xl px-5 py-4 text-[15px] text-white placeholder-slate-600 focus:outline-none focus:border-[#0091ff] focus:ring-1 focus:ring-[#0091ff] transition-all resize-none" 
                   required 
+                  disabled={status === 'submitting'}
                 />
               </div>
 
-              <button type="submit" className="w-full bg-white hover:bg-slate-100 text-slate-900 py-4.5 rounded-xl text-[16px] font-semibold flex items-center justify-center gap-2.5 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] cursor-pointer shadow-lg">
-                <span>Send Message</span>
+              {status === 'success' && (
+                <div className="bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 p-4 rounded-xl text-[14px] text-center font-medium animate-fade-in">
+                  Thank you! Your message has been sent successfully. We will get back to you soon.
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className="bg-rose-500/10 border border-rose-500/30 text-rose-400 p-4 rounded-xl text-[14px] text-center font-medium animate-fade-in">
+                  {errorMessage}
+                </div>
+              )}
+
+              <button 
+                type="submit" 
+                disabled={status === 'submitting'}
+                className="w-full bg-white hover:bg-slate-100 text-slate-900 py-4.5 rounded-xl text-[16px] font-semibold flex items-center justify-center gap-2.5 transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] cursor-pointer shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <span>{status === 'submitting' ? 'Sending...' : 'Send Message'}</span>
                 <svg className="w-5 h-5 text-slate-900" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

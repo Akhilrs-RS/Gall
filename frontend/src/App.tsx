@@ -15,6 +15,14 @@ import Marketing from './pages/Marketing'
 import UIUX from './pages/UIUX'
 import Careers from './pages/Careers'
 import Other from './pages/Other'
+import ManpowerHR from './pages/ManpowerHR'
+import HRRecruitment from './pages/HRRecruitment'
+import LogisticsSupplyChain from './pages/LogisticsSupplyChain'
+import Healthcare from './pages/Healthcare'
+import Education from './pages/Education'
+import Retail from './pages/Retail'
+import Finance from './pages/Finance'
+import CorporateOperations from './pages/CorporateOperations'
 
 function App() {
   const [view, setView] = useState<ViewState>('other')
@@ -63,6 +71,22 @@ function App() {
         setView('about')
       } else if (hash.startsWith('#careers')) {
         setView('careers')
+      } else if (hash.startsWith('#manpower-hr')) {
+        setView('manpower-hr')
+      } else if (hash.startsWith('#hr-recruitment')) {
+        setView('hr-recruitment')
+      } else if (hash.startsWith('#logistics-supply-chain')) {
+        setView('logistics-supply-chain')
+      } else if (hash.startsWith('#healthcare')) {
+        setView('healthcare')
+      } else if (hash.startsWith('#education')) {
+        setView('education')
+      } else if (hash.startsWith('#retail')) {
+        setView('retail')
+      } else if (hash.startsWith('#finance')) {
+        setView('finance')
+      } else if (hash.startsWith('#corporate-operations')) {
+        setView('corporate-operations')
       } else if (hash.startsWith('#automation')) {
         setView('automation')
       } else if (hash.startsWith('#web')) {
@@ -103,6 +127,14 @@ function App() {
         {view === 'about' && <About navigateToContact={navigateToContact} />}
         {view === 'works' && <Works navigateToContact={navigateToContact} />}
         {view === 'industry' && <Industry navigateToContact={navigateToContact} />}
+        {view === 'manpower-hr' && <ManpowerHR navigateToContact={navigateToContact} />}
+        {view === 'hr-recruitment' && <HRRecruitment navigateToContact={navigateToContact} />}
+        {view === 'logistics-supply-chain' && <LogisticsSupplyChain navigateToContact={navigateToContact} />}
+        {view === 'healthcare' && <Healthcare navigateToContact={navigateToContact} />}
+        {view === 'education' && <Education navigateToContact={navigateToContact} />}
+        {view === 'retail' && <Retail navigateToContact={navigateToContact} />}
+        {view === 'finance' && <Finance navigateToContact={navigateToContact} />}
+        {view === 'corporate-operations' && <CorporateOperations navigateToContact={navigateToContact} />}
         {view === 'contact' && <Contact navigateToContact={navigateToContact} />}
         {view === 'services' && <Services view={view} setView={setView} navigateToContact={navigateToContact} />}
         {view === 'erp' && <Erp navigateToContact={navigateToContact} />}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import industryImg from '../assets/industry.png'
 
 interface IndustryProps {
@@ -6,6 +6,25 @@ interface IndustryProps {
 }
 
 const Industry: React.FC<IndustryProps> = ({ navigateToContact }) => {
+  useEffect(() => {
+    const handleScrollToHash = () => {
+      const hash = window.location.hash
+      if (hash && hash.startsWith('#industry-')) {
+        const id = hash.substring(1)
+        const element = document.getElementById(id)
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          }, 150)
+        }
+      }
+    }
+
+    handleScrollToHash()
+    window.addEventListener('hashchange', handleScrollToHash)
+    return () => window.removeEventListener('hashchange', handleScrollToHash)
+  }, [])
+
   return (
     <>
       {/* Industry Section with desktop background image overlay */}
@@ -53,7 +72,7 @@ const Industry: React.FC<IndustryProps> = ({ navigateToContact }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
             
             {/* Card 1: Manpower & HR */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
+            <div id="industry-manpower" className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
               <div>
                 {/* Card Header: Icon & Title */}
                 <div className="flex items-center gap-5 mb-6 md:mb-8">
@@ -108,7 +127,7 @@ const Industry: React.FC<IndustryProps> = ({ navigateToContact }) => {
             </div>
 
             {/* Card 2: HR & Recruitment */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
+            <div id="industry-recruitment" className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
               <div>
                 {/* Card Header: Icon & Title */}
                 <div className="flex items-center gap-5 mb-6 md:mb-8">
@@ -163,7 +182,7 @@ const Industry: React.FC<IndustryProps> = ({ navigateToContact }) => {
             </div>
 
             {/* Card 3: Logistics & Supply Chain */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
+            <div id="industry-logistics" className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
               <div>
                 {/* Card Header: Icon & Title */}
                 <div className="flex items-center gap-5 mb-6 md:mb-8">
@@ -218,7 +237,7 @@ const Industry: React.FC<IndustryProps> = ({ navigateToContact }) => {
             </div>
 
             {/* Card 4: Healthcare */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
+            <div id="industry-healthcare" className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
               <div>
                 {/* Card Header: Icon & Title */}
                 <div className="flex items-center gap-5 mb-6 md:mb-8">
@@ -273,7 +292,7 @@ const Industry: React.FC<IndustryProps> = ({ navigateToContact }) => {
             </div>
 
             {/* Card 1: Education */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
+            <div id="industry-education" className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
               <div>
                 {/* Card Header: Icon & Title */}
                 <div className="flex items-center gap-5 mb-6 md:mb-8">
@@ -328,7 +347,7 @@ const Industry: React.FC<IndustryProps> = ({ navigateToContact }) => {
             </div>
 
             {/* Card 2: Retail */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
+            <div id="industry-retail" className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
               <div>
                 {/* Card Header: Icon & Title */}
                 <div className="flex items-center gap-5 mb-6 md:mb-8">
@@ -383,7 +402,7 @@ const Industry: React.FC<IndustryProps> = ({ navigateToContact }) => {
             </div>
 
             {/* Card 3: Finance */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
+            <div id="industry-finance" className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
               <div>
                 {/* Card Header: Icon & Title */}
                 <div className="flex items-center gap-5 mb-6 md:mb-8">
@@ -438,7 +457,7 @@ const Industry: React.FC<IndustryProps> = ({ navigateToContact }) => {
             </div>
 
             {/* Card 4: Corporate Operations */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
+            <div id="industry-corporate" className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[28px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300">
               <div>
                 {/* Card Header: Icon & Title */}
                 <div className="flex items-center gap-5 mb-6 md:mb-8">

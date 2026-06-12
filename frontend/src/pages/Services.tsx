@@ -1,9 +1,10 @@
 import React from 'react'
+import type { ViewState } from '../types'
 import servicesImg from '../assets/Service.png'
 
 interface ServicesProps {
-  view: 'about' | 'works' | 'industry' | 'contact' | 'services' | 'erp' | 'automation' | 'web' | 'dashboard' | 'marketing' | 'uiux' | 'careers' | 'other';
-  setView: React.Dispatch<React.SetStateAction<'about' | 'works' | 'industry' | 'contact' | 'services' | 'erp' | 'automation' | 'web' | 'dashboard' | 'marketing' | 'uiux' | 'careers' | 'other'>>;
+  view: ViewState;
+  setView: React.Dispatch<React.SetStateAction<ViewState>>;
   navigateToContact: (page: 1 | 2 | 3) => void;
 }
 
@@ -58,10 +59,10 @@ const Services: React.FC<ServicesProps> = ({ setView, navigateToContact }) => {
             <a 
               href="#erp"
               onClick={() => setView('erp')}
-              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 hover:scale-[1.01] transition-all duration-300 text-left cursor-pointer"
+              className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#cc6f2a] hover:bg-[#cc6f2a]/5 hover:scale-[1.01] transition-all duration-300 group cursor-pointer text-left"
             >
-              <div className="text-slate-300 mb-6">
-                <svg className="w-6 h-6 text-slate-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <div className="text-slate-300 mb-6 group-hover:text-[#cc6f2a] transition-colors">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 7c0-1.657 3.582-3 8-3s8 1.343 8 3M4 7c0 1.657 3.582 3 8 3s8-1.343 8-3M4 7v10c0 1.657 3.582 3 8 3s8-1.343 8-3V7M4 12c0 1.657 3.582 3 8 3s8-1.343 8-3" />
                 </svg>
               </div>
@@ -74,8 +75,12 @@ const Services: React.FC<ServicesProps> = ({ setView, navigateToContact }) => {
             </a>
 
             {/* Card 2: Business Automation */}
-            <a href="#automation" onClick={() => setView('automation')} className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#539be2]/50 hover:bg-[#021627]/60 transition-all duration-300 group cursor-pointer">
-              <div className="text-slate-300 mb-6 group-hover:text-[#539be2] transition-colors">
+            <a 
+              href="#automation" 
+              onClick={() => setView('automation')} 
+              className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#cc6f2a] hover:bg-[#cc6f2a]/5 hover:scale-[1.01] transition-all duration-300 group cursor-pointer text-left"
+            >
+              <div className="text-slate-300 mb-6 group-hover:text-[#cc6f2a] transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v4M12 10H5v4M12 10h7v4M12 10v4M10 2h4v4h-4zM3 14h4v4H3zM10 14h4v4h-4zM17 14h4v4h-4z" />
                 </svg>
@@ -89,8 +94,12 @@ const Services: React.FC<ServicesProps> = ({ setView, navigateToContact }) => {
             </a>
 
             {/* Card 3: Web Application Development */}
-            <a href="#web" onClick={() => setView('web')} className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#539be2]/50 hover:bg-[#021627]/60 transition-all duration-300 group cursor-pointer">
-              <div className="text-slate-300 mb-6 group-hover:text-[#539be2] transition-colors">
+            <a 
+              href="#web" 
+              onClick={() => setView('web')} 
+              className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#cc6f2a] hover:bg-[#cc6f2a]/5 hover:scale-[1.01] transition-all duration-300 group cursor-pointer text-left"
+            >
+              <div className="text-slate-300 mb-6 group-hover:text-[#cc6f2a] transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <circle cx="12" cy="12" r="10" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
@@ -105,8 +114,12 @@ const Services: React.FC<ServicesProps> = ({ setView, navigateToContact }) => {
             </a>
 
             {/* Card 4: Dashboard & Analytics */}
-            <a href="#dashboard" onClick={() => setView('dashboard')} className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#539be2]/50 hover:bg-[#021627]/60 transition-all duration-300 group cursor-pointer">
-              <div className="text-slate-300 mb-6 group-hover:text-[#539be2] transition-colors">
+            <a 
+              href="#dashboard" 
+              onClick={() => setView('dashboard')} 
+              className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#cc6f2a] hover:bg-[#cc6f2a]/5 hover:scale-[1.01] transition-all duration-300 group cursor-pointer text-left"
+            >
+              <div className="text-slate-300 mb-6 group-hover:text-[#cc6f2a] transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M18 20V10M12 20V4M6 20v-6" />
                 </svg>
@@ -120,8 +133,12 @@ const Services: React.FC<ServicesProps> = ({ setView, navigateToContact }) => {
             </a>
 
             {/* Card 5: Digital Marketing */}
-            <a href="#marketing" onClick={() => setView('marketing')} className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#539be2]/50 hover:bg-[#021627]/60 transition-all duration-300 group cursor-pointer">
-              <div className="text-slate-300 mb-6 group-hover:text-[#539be2] transition-colors">
+            <a 
+              href="#marketing" 
+              onClick={() => setView('marketing')} 
+              className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#cc6f2a] hover:bg-[#cc6f2a]/5 hover:scale-[1.01] transition-all duration-300 group cursor-pointer text-left"
+            >
+              <div className="text-slate-300 mb-6 group-hover:text-[#cc6f2a] transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h3l3-9 4 18 3-12h5" />
                 </svg>
@@ -135,8 +152,12 @@ const Services: React.FC<ServicesProps> = ({ setView, navigateToContact }) => {
             </a>
 
             {/* Card 6: UI/UX Design */}
-            <a href="#uiux" onClick={() => setView('uiux')} className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#539be2]/50 hover:bg-[#021627]/60 transition-all duration-300 group cursor-pointer">
-              <div className="text-slate-300 mb-6 group-hover:text-[#539be2] transition-colors">
+            <a 
+              href="#uiux" 
+              onClick={() => setView('uiux')} 
+              className="block border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] hover:border-[#cc6f2a] hover:bg-[#cc6f2a]/5 hover:scale-[1.01] transition-all duration-300 group cursor-pointer text-left"
+            >
+              <div className="text-slate-300 mb-6 group-hover:text-[#cc6f2a] transition-colors">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 7c0-1.657 3.582-3 8-3s8 1.343 8 3M4 7c0 1.657 3.582 3 8 3s8-1.343 8-3M4 7v10c0 1.657 3.582 3 8 3s8-1.343 8-3V7M4 12c0 1.657 3.582 3 8 3s8-1.343 8-3" />
                 </svg>

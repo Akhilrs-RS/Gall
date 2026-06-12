@@ -48,7 +48,7 @@ const Careers: React.FC<CareersProps> = ({ navigateToContact }) => {
       </section>
 
       {/* Careers Page 2: Why Work With Us Section */}
-      <section id="careers-page-2" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+      <section id="careers-page-2" className="w-full bg-[#07080a] py-16 md:py-24 border-t border-slate-900/60">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col items-center">
           
           {/* Subtitle & Heading */}
@@ -96,7 +96,7 @@ const Careers: React.FC<CareersProps> = ({ navigateToContact }) => {
       </section>
 
       {/* Careers Page 3: Life at Galletrix */}
-      <section id="careers-page-3" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+      <section id="careers-page-3" className="w-full bg-[#07080a] py-16 md:py-24 border-t border-slate-900/60">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-2 gap-20 animate-fade-in">
           {/* Left Column */}
           <div className="flex flex-col justify-center">
@@ -148,7 +148,7 @@ const Careers: React.FC<CareersProps> = ({ navigateToContact }) => {
       </section>
 
       {/* Careers Page 4: Hiring Process Timeline */}
-      <section id="careers-page-4" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+      <section id="careers-page-4" className="w-full bg-[#07080a] py-16 md:py-24 border-t border-slate-900/60">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col justify-between items-center animate-fade-in">
           {/* Upper Half: Timeline Heading */}
           <div className="flex flex-col items-center text-center mb-24">
