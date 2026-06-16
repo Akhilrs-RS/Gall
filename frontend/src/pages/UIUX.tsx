@@ -9,27 +9,34 @@ const UIUX: React.FC<UIUXProps> = ({ navigateToContact }) => {
   return (
     <>
       {/* UIUX Page 1: Hero */}
-      <section id="uiux" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between">
-        <div className="absolute inset-0 hidden lg:grid lg:grid-cols-2">
-          <div className="bg-[#07080a] w-full h-full"></div>
-          <div className="bg-[#07080a] w-full h-full relative overflow-hidden flex items-center justify-center p-12">
-            <div className="absolute inset-0 bg-[#07080a] mix-blend-overlay z-10"></div>
-            <div className="relative z-0 w-full max-w-lg aspect-square rounded-[40px] overflow-hidden shadow-[0_0_80px_rgba(83,155,226,0.15)] ring-1 ring-[#539be2]/20 group">
-              <img src={uiuxImg} alt="UI/UX Design" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+      <section id="uiux" className="w-full bg-[#07080a] pt-32 md:pt-40 pb-20 flex flex-col justify-center min-h-[calc(100vh-6rem)] lg:min-h-0">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Text */}
+          <div className="lg:col-span-7 flex flex-col items-start">
+            <span className="font-sans text-[14px] font-semibold tracking-widest text-[#539be2] uppercase mb-4">
+              Galletrix Service
+            </span>
+            <h1 className="font-serif text-[48px] sm:text-[56px] md:text-[68px] font-medium leading-[1.12] text-white tracking-tight mb-8">
+              UI/UX Design
+            </h1>
+            <p className="font-sans text-[20px] md:text-[22px] font-medium text-[#539be2] leading-snug mb-6 max-w-lg">
+              Design better user experiences.
+            </p>
+            <p className="font-sans text-[16px] sm:text-[17px] leading-[1.7] text-slate-300 max-w-2xl">
+              Galletrix designs clean, modern, and user-friendly digital experiences for websites, mobile apps, dashboards, and software platforms.
+            </p>
+          </div>
+
+          {/* Right Column: Image */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end w-full">
+            <div className="relative z-0 w-full max-w-md aspect-[4/3] lg:aspect-square overflow-hidden shadow-[0_0_80px_rgba(83,155,226,0.15)] ring-1 ring-[#539be2]/20">
+              <img 
+                src={uiuxImg} 
+                alt="UI/UX Design" 
+                className="w-full h-full object-cover"
+              />
               <div className="absolute inset-0 bg-gradient-to-tr from-[#021627]/60 to-transparent"></div>
             </div>
-          </div>
-        </div>
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 md:pt-32 flex flex-col items-start lg:w-1/2">
-          <span className="font-sans text-[14px] font-semibold tracking-widest text-[#539be2] uppercase mb-4">Galletrix Service</span>
-          <h1 className="font-serif text-[48px] sm:text-[56px] md:text-[68px] font-medium leading-[1.12] text-white tracking-tight mb-8">UI/UX Design</h1>
-          <p className="font-sans text-[20px] md:text-[22px] font-medium text-[#539be2] leading-snug mb-6 max-w-lg">Design better user experiences.</p>
-          <p className="font-sans text-[16px] sm:text-[17px] leading-[1.7] text-slate-300 max-w-md mb-12">Galletrix designs clean, modern, and user-friendly digital experiences for websites, mobile apps, dashboards, and software platforms.</p>
-        </div>
-        <div className="w-full lg:hidden bg-[#07080a] py-12 px-6">
-          <div className="w-full aspect-square rounded-[32px] overflow-hidden shadow-[0_0_60px_rgba(83,155,226,0.15)] ring-1 ring-[#539be2]/20 relative">
-            <img src={uiuxImg} alt="UI/UX Design" className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#021627]/60 to-transparent"></div>
           </div>
         </div>
       </section>

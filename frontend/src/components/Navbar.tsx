@@ -1,5 +1,5 @@
 import React from 'react'
-import logoImg from '../assets/logo.jpg'
+import logoImg from '../assets/logog.png'
 import type { ViewState } from '../types'
 
 interface NavbarProps {
@@ -10,6 +10,34 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ view, setView, navigateToContact }) => {
   const [isScrolled, setIsScrolled] = React.useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false)
+  const [isServicesExpanded, setIsServicesExpanded] = React.useState(false)
+  const [isIndustryExpanded, setIsIndustryExpanded] = React.useState(false)
+
+  const handleMobileNav = (targetView: ViewState) => {
+    setView(targetView)
+    setIsMobileMenuOpen(false)
+    setIsServicesExpanded(false)
+    setIsIndustryExpanded(false)
+  }
+
+  const handleMobileContact = (page: 1 | 2 | 3) => {
+    navigateToContact(page)
+    setIsMobileMenuOpen(false)
+    setIsServicesExpanded(false)
+    setIsIndustryExpanded(false)
+  }
+
+  React.useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+    return () => {
+      document.body.classList.remove('overflow-hidden')
+    }
+  }, [isMobileMenuOpen])
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -29,13 +57,13 @@ const Navbar: React.FC<NavbarProps> = ({ view, setView, navigateToContact }) => 
     <header className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
         ? 'bg-[#07080a]/80 backdrop-blur-md border-b border-slate-900/80 shadow-lg' 
-        : 'bg-transparent border-b border-transparent'
+        : 'bg-[#07080a] border-b border-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-6 md:px-12 h-24 flex items-center justify-between">
         
         {/* Logo */}
         <div className="flex items-center">
-          <a href="#logo" onClick={() => setView('other')} className="hover:opacity-90 transition-opacity flex items-center">
+          <a href="#logo" onClick={() => handleMobileNav('other')} className="hover:opacity-90 transition-opacity flex items-center">
             <img 
               src={logoImg} 
               alt="GALLETRIX" 
@@ -458,20 +486,154 @@ const Navbar: React.FC<NavbarProps> = ({ view, setView, navigateToContact }) => 
           </a>
         </nav>
 
-        {/* Call to Action Button */}
-        <div className="flex items-center">
+        {/* Call to Action Button & Mobile Menu Toggle */}
+        <div className="flex items-center space-x-4">
           <a 
             href="#contact"
             onClick={(e) => {
               e.preventDefault()
-              navigateToContact(2)
+              handleMobileContact(2)
             }}
-            className="bg-[#cc6f2a] hover:bg-[#b86120] text-white px-8 py-3.5 rounded-full text-[15px] font-semibold tracking-wide transition-all duration-300 shadow-lg shadow-amber-950/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer inline-block text-center"
+            className="hidden sm:inline-block bg-[#cc6f2a] hover:bg-[#b86120] text-white px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full text-[14px] sm:text-[15px] font-semibold tracking-wide transition-all duration-300 shadow-lg shadow-amber-950/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-center"
           >
             Let's Talk
           </a>
+
+          {/* Hamburger Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900/60 transition-colors focus:outline-none"
+            aria-label="Toggle Menu"
+          >
+            {isMobileMenuOpen ? (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Drawer Overlay */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden fixed inset-x-0 bottom-0 top-24 bg-[#07080a] border-t border-slate-900/80 z-40 overflow-y-auto animate-fade-in flex flex-col justify-between">
+          <div className="px-6 py-8 space-y-6">
+            {/* Services (Collapsible) */}
+            <div>
+              <button 
+                onClick={() => setIsServicesExpanded(!isServicesExpanded)}
+                className="w-full flex items-center justify-between text-left text-[18px] font-semibold text-slate-100 py-2"
+              >
+                <span className={view === 'services' || view === 'erp' ? 'text-[#cc6f2a]' : 'text-slate-100'}>Services</span>
+                <svg className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${isServicesExpanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {isServicesExpanded && (
+                <div className="mt-3 ml-4 pl-4 border-l border-slate-900/80 flex flex-col space-y-4">
+                  <a href="#erp" onClick={() => handleMobileNav('erp')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'erp' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>ERP Solutions</a>
+                  <a href="#automation" onClick={() => handleMobileNav('automation')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'automation' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>Business Automation</a>
+                  <a href="#web" onClick={() => handleMobileNav('web')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'web' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>Web Application Development</a>
+                  <a href="#dashboard" onClick={() => handleMobileNav('dashboard')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'dashboard' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>Dashboard & Analytics</a>
+                  <a href="#marketing" onClick={() => handleMobileNav('marketing')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'marketing' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>Digital Marketing</a>
+                  <a href="#uiux" onClick={() => handleMobileNav('uiux')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'uiux' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>UIUX Design</a>
+                </div>
+              )}
+            </div>
+
+            {/* About */}
+            <div>
+              <a 
+                href="#about" 
+                onClick={() => handleMobileNav('about')}
+                className={`block text-[18px] font-semibold py-2 hover:text-[#cc6f2a] transition-colors ${view === 'about' ? 'text-[#cc6f2a]' : 'text-slate-100'}`}
+              >
+                About
+              </a>
+            </div>
+
+            {/* Industry (Collapsible) */}
+            <div>
+              <button 
+                onClick={() => setIsIndustryExpanded(!isIndustryExpanded)}
+                className="w-full flex items-center justify-between text-left text-[18px] font-semibold text-slate-100 py-2"
+              >
+                <span className={view === 'industry' ? 'text-[#cc6f2a]' : 'text-slate-100'}>Industry</span>
+                <svg className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${isIndustryExpanded ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              
+              {isIndustryExpanded && (
+                <div className="mt-3 ml-4 pl-4 border-l border-slate-900/80 flex flex-col space-y-4">
+                  <a href="#manpower-hr" onClick={() => handleMobileNav('manpower-hr')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'manpower-hr' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>Manpower & HR</a>
+                  <a href="#hr-recruitment" onClick={() => handleMobileNav('hr-recruitment')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'hr-recruitment' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>HR & Recruitment</a>
+                  <a href="#logistics-supply-chain" onClick={() => handleMobileNav('logistics-supply-chain')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'logistics-supply-chain' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>Logistics & Supply chain</a>
+                  <a href="#healthcare" onClick={() => handleMobileNav('healthcare')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'healthcare' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>Healthcare</a>
+                  <a href="#education" onClick={() => handleMobileNav('education')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'education' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>Education</a>
+                  <a href="#retail" onClick={() => handleMobileNav('retail')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'retail' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>Retail</a>
+                  <a href="#finance" onClick={() => handleMobileNav('finance')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'finance' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>Finance</a>
+                  <a href="#corporate-operations" onClick={() => handleMobileNav('corporate-operations')} className={`text-[16px] font-medium transition-colors py-1 ${view === 'corporate-operations' ? 'text-[#cc6f2a]' : 'text-slate-400 hover:text-white'}`}>Corporate Operations</a>
+                </div>
+              )}
+            </div>
+
+            {/* Works */}
+            <div>
+              <a 
+                href="#works" 
+                onClick={() => handleMobileNav('works')}
+                className={`block text-[18px] font-semibold py-2 hover:text-[#cc6f2a] transition-colors ${view === 'works' ? 'text-[#cc6f2a]' : 'text-slate-100'}`}
+              >
+                Works
+              </a>
+            </div>
+
+            {/* Careers */}
+            <div>
+              <a 
+                href="#careers" 
+                onClick={() => handleMobileNav('careers')}
+                className={`block text-[18px] font-semibold py-2 hover:text-[#cc6f2a] transition-colors ${view === 'careers' ? 'text-[#cc6f2a]' : 'text-slate-100'}`}
+              >
+                Careers
+              </a>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <a 
+                href="#contact" 
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleMobileContact(1)
+                }}
+                className={`block text-[18px] font-semibold py-2 hover:text-[#cc6f2a] transition-colors ${view === 'contact' ? 'text-[#cc6f2a]' : 'text-slate-100'}`}
+              >
+                Contact
+              </a>
+            </div>
+          </div>
+
+          <div className="px-6 pb-12 pt-4 border-t border-slate-900/60 mt-auto">
+            <a 
+              href="#contact"
+              onClick={(e) => {
+                e.preventDefault()
+                handleMobileContact(2)
+              }}
+              className="w-full block bg-[#cc6f2a] hover:bg-[#b86120] text-white py-4 rounded-full text-[16px] font-semibold tracking-wide transition-all duration-300 shadow-lg shadow-amber-950/20 text-center"
+            >
+              Let's Talk
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   )
 }

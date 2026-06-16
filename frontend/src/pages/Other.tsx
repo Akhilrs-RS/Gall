@@ -4,8 +4,9 @@ import gGif from '../assets/g.gif'
 import g1Img from '../assets/g1.png'
 import g2Img from '../assets/g2.png'
 import g3Img from '../assets/g3.png'
-import g5Gif from '../assets/g5.gif'
+import maVid from '../assets/ma.mp4'
 import g0Img from '../assets/g0.png'
+import l3Img from '../assets/l3.png'
 
 interface OtherProps {
   setView: (view: ViewState) => void;
@@ -112,7 +113,7 @@ const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
           {/* Laptop Mockup Image */}
           <div className="w-full flex justify-center mt-6">
             <img 
-              src={g2Img} 
+              src={l3Img} 
               alt="Galletrix Dashboard Solution Mockup" 
               className="w-full h-auto object-cover rounded-[24px] md:rounded-[32px] shadow-2xl border border-slate-800/60"
             />
@@ -167,11 +168,14 @@ const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
             Our platforms integrate data streams, orchestrate background tasks, and trigger intelligent actions automatically. We ensure your software stack operates in perfect harmony, removing friction and reducing manual effort.
           </p>
 
-          {/* Orchestration GIF */}
+          {/* Orchestration Video */}
           <div className="w-full flex justify-center mt-6">
-            <img 
-              src={g5Gif} 
-              alt="Galletrix System Orchestration Animation" 
+            <video 
+              src={maVid} 
+              autoPlay 
+              loop 
+              muted 
+              playsInline 
               className="w-full h-auto object-cover rounded-[24px] md:rounded-[32px] shadow-2xl border border-slate-800/60"
             />
           </div>

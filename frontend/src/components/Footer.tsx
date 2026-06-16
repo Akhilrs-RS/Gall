@@ -1,4 +1,5 @@
 import React from 'react'
+import logoImg from '../assets/logog.png'
 import type { ViewState } from '../types'
 
 interface FooterProps {
@@ -14,16 +15,20 @@ const Footer: React.FC<FooterProps> = ({ setView, navigateToContact }) => {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-start">
           {/* Brand and Description Column */}
           <div className="col-span-12 md:col-span-6 space-y-6">
-            <span className="font-serif font-bold text-[22px] tracking-wide text-white block">
-              GALLETRIX
-            </span>
+            <a href="#logo" onClick={(e) => { e.preventDefault(); setView('other'); }} className="hover:opacity-90 transition-opacity inline-block">
+              <img 
+                src={logoImg} 
+                alt="GALLETRIX" 
+                className="h-10 md:h-12 w-auto object-contain rounded-md"
+              />
+            </a>
             <p className="text-slate-400 text-[15px] leading-relaxed max-w-sm">
               Architects of digital order. Building intelligent enterprise solutions for the modern era.
             </p>
             
             {/* Social Icons */}
             <div className="flex items-center space-x-6 pt-2">
-              <a href="#instagram" className="text-slate-400 hover:text-white transition-colors duration-200" aria-label="Instagram">
+              <a href="https://www.instagram.com/galletrix_innovations?utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors duration-200" aria-label="Instagram">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>

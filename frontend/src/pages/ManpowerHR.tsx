@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import z1Img from '../assets/z1.png'
+import w1Img from '../assets/w1.png'
 
 interface ManpowerHRProps {
   navigateToContact: (page: 1 | 2 | 3) => void;
@@ -15,51 +15,31 @@ const ManpowerHR: React.FC<ManpowerHRProps> = ({ navigateToContact }) => {
   return (
     <>
       {/* Hero Section */}
-      <section id="manpower-hr-hero" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between">
-        {/* Desktop split layout */}
-        <div className="absolute inset-0 hidden lg:grid lg:grid-cols-2">
-          <div className="bg-[#07080a] w-full h-full"></div>
-          <div className="bg-[#07080a] w-full h-full relative overflow-hidden flex items-center justify-center p-12">
-            <div className="absolute inset-0 bg-[#07080a] mix-blend-overlay z-10"></div>
-            <div className="relative z-0 w-full max-w-lg aspect-square rounded-[40px] overflow-hidden shadow-[0_0_80px_rgba(83,155,226,0.15)] ring-1 ring-[#539be2]/20 group">
+      <section id="manpower-hr-hero" className="w-full bg-[#07080a] pt-32 md:pt-40 pb-20 flex flex-col justify-center min-h-[calc(100vh-6rem)] lg:min-h-0">
+        <div className="w-full max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Text */}
+          <div className="lg:col-span-7 flex flex-col items-start">
+            <span className="font-sans text-[14px] font-semibold tracking-widest text-[#539be2] uppercase mb-4">
+              Workforce management systems
+            </span>
+            <h1 className="font-serif text-[48px] sm:text-[56px] md:text-[68px] font-bold leading-[1.12] text-white tracking-tight mb-8">
+              Manpower & HR
+            </h1>
+            <p className="font-sans text-[16px] sm:text-[18px] leading-[1.7] text-slate-300 max-w-2xl">
+              Galletrix helps manpower and HR teams manage employees, attendance, payroll, compliance, and workforce operations through smart digital platforms.
+            </p>
+          </div>
+
+          {/* Right Column: Image */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end w-full">
+            <div className="relative z-0 w-full max-w-md aspect-[4/3] lg:aspect-square overflow-hidden shadow-[0_0_80px_rgba(83,155,226,0.15)] ring-1 ring-[#539be2]/20">
               <img 
-                src={z1Img} 
+                src={w1Img} 
                 alt="Manpower & HR Solutions" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-tr from-[#021627]/60 to-transparent"></div>
             </div>
-          </div>
-        </div>
-
-        {/* Text Content */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 md:pt-32 flex flex-col items-start lg:w-1/2">
-          <span className="font-sans text-[14px] font-semibold tracking-widest text-[#539be2] uppercase mb-4">
-            Workforce management system
-          </span>
-          <h1 className="font-serif text-[48px] sm:text-[56px] md:text-[68px] font-bold leading-[1.12] text-white tracking-tight mb-8">
-            Manpower & HR
-          </h1>
-          <p className="font-sans text-[16px] sm:text-[18px] leading-[1.7] text-slate-300 max-w-md mb-12">
-            Automate workforce recruitment, onboarding, employee information, payroll, compliance, and workforce operations through robust digital systems.
-          </p>
-          <button 
-            onClick={() => navigateToContact(2)} 
-            className="bg-[#cc6f2a] hover:bg-[#b86120] text-white px-8 py-3.5 rounded-full text-[15px] font-semibold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer shadow-lg shadow-amber-950/20"
-          >
-            Discuss Your Requirements
-          </button>
-        </div>
-
-        {/* Mobile Block Image */}
-        <div className="w-full lg:hidden bg-[#07080a] py-12 px-6">
-          <div className="w-full aspect-square rounded-[32px] overflow-hidden shadow-[0_0_60px_rgba(83,155,226,0.15)] ring-1 ring-[#539be2]/20 relative">
-            <img 
-              src={z1Img} 
-              alt="Manpower & HR Solutions" 
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#021627]/60 to-transparent"></div>
           </div>
         </div>
       </section>
