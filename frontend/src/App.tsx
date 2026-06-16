@@ -23,6 +23,7 @@ import Education from './pages/Education'
 import Retail from './pages/Retail'
 import Finance from './pages/Finance'
 import CorporateOperations from './pages/CorporateOperations'
+import CareersApply from './pages/CareersApply'
 
 function App() {
   const [view, setView] = useState<ViewState>('other')
@@ -69,6 +70,8 @@ function App() {
         }
       } else if (hash.startsWith('#about')) {
         setView('about')
+      } else if (hash.startsWith('#careers-apply')) {
+        setView('careers-apply')
       } else if (hash.startsWith('#careers')) {
         setView('careers')
       } else if (hash.startsWith('#manpower-hr')) {
@@ -144,6 +147,7 @@ function App() {
         {view === 'marketing' && <Marketing navigateToContact={navigateToContact} />}
         {view === 'uiux' && <UIUX navigateToContact={navigateToContact} />}
         {view === 'careers' && <Careers navigateToContact={navigateToContact} />}
+        {view === 'careers-apply' && <CareersApply navigateToContact={navigateToContact} />}
         {view === 'other' && <Other setView={setView} navigateToContact={navigateToContact} />}
       </main>
 

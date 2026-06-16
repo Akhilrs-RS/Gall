@@ -1,6 +1,6 @@
 import React from 'react'
 import type { ViewState } from '../types'
-import gGif from '../assets/g.gif'
+import videoMp4 from '../assets/video.mp4'
 import g1Img from '../assets/g1.png'
 import g2Img from '../assets/g2.png'
 import g3Img from '../assets/g3.png'
@@ -16,29 +16,35 @@ interface OtherProps {
 const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
   return (
     <>
-      {/* Other Pages Section displaying g.gif at the top */}
+      {/* Page 1: Hero Section (video.mp4) */}
       <section id="other-page" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between min-h-[calc(100vh-6rem)] lg:min-h-0 animate-fade-in">
-        {/* Desktop Background GIF */}
+        {/* Desktop Background Video */}
         <div className="absolute inset-0 hidden lg:block">
-          <img 
-            src={gGif} 
-            alt="Galletrix Logo Animation" 
+          <video 
+            src={videoMp4} 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
             className="w-full h-full object-cover object-center"
           />
         </div>
 
-        {/* Mobile Block GIF */}
+        {/* Mobile Block Video */}
         <div className="w-full lg:hidden my-6">
-          <img 
-            src={gGif} 
-            alt="Galletrix Logo Animation" 
+          <video 
+            src={videoMp4} 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
             className="w-full h-auto object-cover"
           />
         </div>
       </section>
 
       {/* Page 2: Who We Are Section */}
-      <section id="other-page-2" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+      <section id="other-page-2" className="w-full bg-[#021327] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col items-start animate-fade-in">
           {/* Heading */}
           <h2 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-medium leading-[1.12] text-white tracking-tight mb-6">
@@ -65,14 +71,13 @@ const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
 
               <div className="w-full space-y-4 max-w-md">
                 {[
-                  "Smart Business Solutions",
                   "Scalable ERP & CRM Systems",
                   "Clean Web & App Experiences",
                   "Reliable Digital Support"
                 ].map((text, idx) => (
                   <div 
                     key={idx} 
-                    className="border border-slate-800/80 bg-slate-950/20 px-6 py-4.5 rounded-xl text-[16px] font-medium text-slate-300 transition-all duration-300 hover:border-slate-700/60 hover:text-white"
+                    className="border border-slate-700/60 bg-[#021327]/40 px-6 py-4.5 rounded-xl text-[16px] font-medium text-slate-300 transition-all duration-300 hover:border-[#cc6f2a]/60 hover:text-white"
                   >
                     {text}
                   </div>
@@ -93,92 +98,69 @@ const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
       </section>
 
       {/* Page 3: Real Business Problems Section */}
-      <section id="other-page-3" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col items-start animate-fade-in">
+      <section id="other-page-3" className="w-full bg-[#07080a] pt-32 md:pt-40 border-t border-slate-900/60 min-h-screen flex flex-col justify-between overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex-1 flex flex-col items-start justify-between">
           {/* Heading */}
-          <h2 className="font-serif text-[36px] sm:text-[46px] md:text-[56px] font-medium leading-[1.15] text-white tracking-tight mb-6">
+          <h2 className="font-serif text-[42px] sm:text-[52px] md:text-[68px] font-medium leading-[1.12] text-white tracking-tight mb-16">
             Built to solve real business problems
           </h2>
 
-          {/* Progress Status Bar */}
-          <div className="w-full max-w-7xl h-[3px] bg-slate-800 mb-12 flex rounded-full overflow-hidden">
-            <div className="w-[65%] h-full bg-[#cc6f2a]" />
-          </div>
-
-          {/* Description Paragraph */}
-          <p className="font-sans text-[16px] sm:text-[18px] md:text-[20px] leading-[1.7] text-slate-300 max-w-6xl mb-16">
-            As a growing technology startup, Galletrix focuses on building practical digital solutions that help businesses manage operations, automate workflows, and improve productivity. Our work reflects the systems we design, the problems we solve, and the value we aim to create for modern businesses.
-          </p>
-
-          {/* Laptop Mockup Image */}
-          <div className="w-full flex justify-center mt-6">
+          {/* Mockup Image */}
+          <div className="w-full flex-1 flex items-end justify-center">
             <img 
               src={l3Img} 
-              alt="Galletrix Dashboard Solution Mockup" 
-              className="w-full h-auto object-cover rounded-[24px] md:rounded-[32px] shadow-2xl border border-slate-800/60"
+              alt="Built to solve real business problems" 
+              className="w-full h-auto object-cover rounded-t-[24px] md:rounded-t-[32px] border-t border-x border-slate-800/60 shadow-2xl"
             />
           </div>
         </div>
       </section>
 
-      {/* Page 4: Intelligent Tools Section */}
-      <section id="other-page-4" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col items-start animate-fade-in">
-          {/* Heading */}
-          <h2 className="font-serif text-[36px] sm:text-[46px] md:text-[56px] font-medium leading-[1.15] text-white tracking-tight mb-6">
-            Intelligent tools, engineered for scale
-          </h2>
+      {/* Page 4: Intelligent Tools Section (Full Page Image) */}
+      <section id="other-page-4" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between min-h-[calc(100vh-6rem)] lg:min-h-0 animate-fade-in border-t border-slate-900/60">
+        {/* Desktop Background Image */}
+        <div className="absolute inset-0 hidden lg:block">
+          <img 
+            src={g3Img} 
+            alt="Galletrix Workflow Asset Solution Mockup" 
+            className="w-full h-full object-cover"
+          />
+        </div>
 
-          {/* Progress Status Bar */}
-          <div className="w-full max-w-7xl h-[3px] bg-slate-800 mb-12 flex rounded-full overflow-hidden">
-            <div className="w-[85%] h-full bg-[#cc6f2a]" />
-          </div>
-
-          {/* Description Paragraph */}
-          <p className="font-sans text-[16px] sm:text-[18px] md:text-[20px] leading-[1.7] text-slate-300 max-w-6xl mb-16">
-            We architect modern digital platforms that empower teams to collaborate, track workflows, and manage complex assets with absolute precision. Every interface is designed to maximize operational efficiency and accelerate business value.
-          </p>
-
-          {/* Laptop Mockup Image */}
-          <div className="w-full flex justify-center mt-6">
-            <img 
-              src={g3Img} 
-              alt="Galletrix Workflow Asset Solution Mockup" 
-              className="w-full h-auto object-cover rounded-[24px] md:rounded-[32px] shadow-2xl border border-slate-800/60"
-            />
-          </div>
+        {/* Mobile Block Image */}
+        <div className="w-full lg:hidden my-6">
+          <img 
+            src={g3Img} 
+            alt="Galletrix Workflow Asset Solution Mockup" 
+            className="w-full h-auto object-cover"
+          />
         </div>
       </section>
 
-      {/* Page 5: System Orchestration Section */}
-      <section id="other-page-5" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col items-start animate-fade-in">
-          {/* Heading */}
-          <h2 className="font-serif text-[36px] sm:text-[46px] md:text-[56px] font-medium leading-[1.15] text-white tracking-tight mb-6">
-            Connecting systems, automating workflows
-          </h2>
+      {/* Page 5: System Orchestration Section (Full Page Video) */}
+      <section id="other-page-5" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between min-h-[calc(100vh-6rem)] lg:min-h-0 animate-fade-in border-t border-slate-900/60">
+        {/* Desktop Background Video */}
+        <div className="absolute inset-0 hidden lg:block">
+          <video 
+            src={maVid} 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="w-full h-full object-cover"
+          />
+        </div>
 
-          {/* Progress Status Bar */}
-          <div className="w-full max-w-7xl h-[3px] bg-slate-800 mb-12 flex rounded-full overflow-hidden">
-            <div className="w-[100%] h-full bg-[#cc6f2a]" />
-          </div>
-
-          {/* Description Paragraph */}
-          <p className="font-sans text-[16px] sm:text-[18px] md:text-[20px] leading-[1.7] text-slate-300 max-w-6xl mb-16">
-            Our platforms integrate data streams, orchestrate background tasks, and trigger intelligent actions automatically. We ensure your software stack operates in perfect harmony, removing friction and reducing manual effort.
-          </p>
-
-          {/* Orchestration Video */}
-          <div className="w-full flex justify-center mt-6">
-            <video 
-              src={maVid} 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              className="w-full h-auto object-cover rounded-[24px] md:rounded-[32px] shadow-2xl border border-slate-800/60"
-            />
-          </div>
+        {/* Mobile Block Video */}
+        <div className="w-full lg:hidden my-6">
+          <video 
+            src={maVid} 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="w-full h-auto object-cover"
+          />
         </div>
       </section>
 
@@ -210,96 +192,116 @@ const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
             <a 
               href="#erp"
               onClick={() => setView('erp')}
-              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 hover:scale-[1.01] transition-all duration-300 text-left cursor-pointer"
+              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 text-left cursor-pointer group/card"
             >
-              <div className="text-slate-300 mb-6">
-                <svg className="w-6 h-6 text-slate-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <div className="text-slate-300 mb-6 transition-transform group-hover/card:scale-105 duration-300">
+                <svg className="w-6 h-6 text-slate-200 group-hover/card:text-white transition-colors duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 7c0-1.657 3.582-3 8-3s8 1.343 8 3M4 7c0 1.657 3.582 3 8 3s8-1.343 8-3M4 7v10c0 1.657 3.582 3 8 3s8-1.343 8-3V7M4 12c0 1.657 3.582 3 8 3s8-1.343 8-3" />
                 </svg>
               </div>
-              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4">
+              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4 transition-colors group-hover/card:text-white">
                 ERP Solutions
               </h3>
-              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
+              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400 group-hover/card:text-slate-300 transition-colors duration-200">
                 Unified enterprise resource planning systems that integrate every facet of your operations into a single, intelligent platform.
               </p>
             </a>
 
             {/* Card 2: Business Automation */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
-              <div className="text-slate-300 mb-6">
-                <svg className="w-6 h-6 text-slate-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <a 
+              href="#automation"
+              onClick={() => setView('automation')}
+              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 text-left cursor-pointer group/card"
+            >
+              <div className="text-slate-300 mb-6 transition-transform group-hover/card:scale-105 duration-300">
+                <svg className="w-6 h-6 text-slate-200 group-hover/card:text-white transition-colors duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v4M12 10H5v4M12 10h7v4M12 10v4M10 2h4v4h-4zM3 14h4v4H3zM10 14h4v4h-4zM17 14h4v4h-4z" />
                 </svg>
               </div>
-              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4">
+              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4 transition-colors group-hover/card:text-white">
                 Business Automation
               </h3>
-              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
+              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400 group-hover/card:text-slate-300 transition-colors duration-200">
                 Eliminate manual processes with intelligent automation that adapts to your workflows and scales with your growth.
               </p>
-            </div>
+            </a>
 
             {/* Card 3: Web Application Development */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
-              <div className="text-slate-300 mb-6">
-                <svg className="w-6 h-6 text-slate-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <a 
+              href="#web"
+              onClick={() => setView('web')}
+              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 text-left cursor-pointer group/card"
+            >
+              <div className="text-slate-300 mb-6 transition-transform group-hover/card:scale-105 duration-300">
+                <svg className="w-6 h-6 text-slate-200 group-hover/card:text-white transition-colors duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <circle cx="12" cy="12" r="10" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
                 </svg>
               </div>
-              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4">
+              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4 transition-colors group-hover/card:text-white">
                 Web Application Development
               </h3>
-              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
+              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400 group-hover/card:text-slate-300 transition-colors duration-200">
                 Custom-built, high-performance web applications designed for scalability, security, and exceptional user experience.
               </p>
-            </div>
+            </a>
 
             {/* Card 4: Dashboard & Analytics */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
-              <div className="text-slate-300 mb-6">
-                <svg className="w-6 h-6 text-slate-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <a 
+              href="#dashboard"
+              onClick={() => setView('dashboard')}
+              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 text-left cursor-pointer group/card"
+            >
+              <div className="text-slate-300 mb-6 transition-transform group-hover/card:scale-105 duration-300">
+                <svg className="w-6 h-6 text-slate-200 group-hover/card:text-white transition-colors duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M18 20V10M12 20V4M6 20v-6" />
                 </svg>
               </div>
-              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4">
+              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4 transition-colors group-hover/card:text-white">
                 Dashboard & Analytics
               </h3>
-              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
+              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400 group-hover/card:text-slate-300 transition-colors duration-200">
                 Real-time data visualization and business intelligence tools that transform raw data into actionable insights.
               </p>
-            </div>
+            </a>
 
             {/* Card 5: Digital Marketing */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
-              <div className="text-slate-300 mb-6">
-                <svg className="w-6 h-6 text-slate-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <a 
+              href="#marketing"
+              onClick={() => setView('marketing')}
+              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 text-left cursor-pointer group/card"
+            >
+              <div className="text-slate-300 mb-6 transition-transform group-hover/card:scale-105 duration-300">
+                <svg className="w-6 h-6 text-slate-200 group-hover/card:text-white transition-colors duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h3l3-9 4 18 3-12h5" />
                 </svg>
               </div>
-              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4">
+              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4 transition-colors group-hover/card:text-white">
                 Digital Marketing
               </h3>
-              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
+              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400 group-hover/card:text-slate-300 transition-colors duration-200">
                 Streamline complex business processes with visual workflow builders and automated task orchestration.
               </p>
-            </div>
+            </a>
 
             {/* Card 6: UIUX Design */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-slate-700/60 transition-all duration-300">
-              <div className="text-slate-300 mb-6">
-                <svg className="w-6 h-6 text-slate-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+            <a 
+              href="#uiux"
+              onClick={() => setView('uiux')}
+              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-start hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 text-left cursor-pointer group/card"
+            >
+              <div className="text-slate-300 mb-6 transition-transform group-hover/card:scale-105 duration-300">
+                <svg className="w-6 h-6 text-slate-200 group-hover/card:text-white transition-colors duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4 7c0-1.657 3.582-3 8-3s8 1.343 8 3M4 7c0 1.657 3.582 3 8 3s8-1.343 8-3M4 7v10c0 1.657 3.582 3 8 3s8-1.343 8-3V7M4 12c0 1.657 3.582 3 8 3s8-1.343 8-3" />
                 </svg>
               </div>
-              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4">
+              <h3 className="font-sans text-[20px] md:text-[22px] font-semibold text-white tracking-tight mb-4 transition-colors group-hover/card:text-white">
                 UIUX Design
               </h3>
-              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
+              <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400 group-hover/card:text-slate-300 transition-colors duration-200">
                 End-to-end digital transformation strategies that modernize legacy systems and unlock new business potential.
               </p>
-            </div>
+            </a>
           </div>
         </div>
       </section>
@@ -461,7 +463,11 @@ const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
             {/* Card 1: Enterprise ERP Platform */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300 min-h-[340px]">
+            <a 
+              href="#works" 
+              onClick={() => setView('works')}
+              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-between hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 min-h-[340px] text-left cursor-pointer group/card"
+            >
               <div className="space-y-6">
                 <span className="text-[12px] font-bold uppercase tracking-widest text-[#cc6f2a]">
                   ERP
@@ -474,21 +480,23 @@ const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
                 </p>
               </div>
               <div className="pt-8">
-                <a 
-                  href="#works" 
-                  onClick={() => setView('works')}
-                  className="flex items-center gap-2 text-[14px] font-bold text-slate-300 hover:text-white cursor-pointer group/link"
+                <div 
+                  className="flex items-center gap-2 text-[14px] font-bold text-slate-300 group-hover/card:text-white transition-colors duration-200"
                 >
                   <span>View Case Study</span>
-                  <svg className="w-4 h-4 transition-transform group-hover/link:translate-x-1 duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 transition-transform group-hover/card:translate-x-1 duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
-                </a>
+                </div>
               </div>
-            </div>
+            </a>
 
             {/* Card 2: HR Automation Suite */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300 min-h-[340px]">
+            <a 
+              href="#works" 
+              onClick={() => setView('works')}
+              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-between hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 min-h-[340px] text-left cursor-pointer group/card"
+            >
               <div className="space-y-6">
                 <span className="text-[12px] font-bold uppercase tracking-widest text-[#cc6f2a]">
                   AUTOMATION
@@ -501,21 +509,23 @@ const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
                 </p>
               </div>
               <div className="pt-8">
-                <a 
-                  href="#works" 
-                  onClick={() => setView('works')}
-                  className="flex items-center gap-2 text-[14px] font-bold text-slate-300 hover:text-white cursor-pointer group/link"
+                <div 
+                  className="flex items-center gap-2 text-[14px] font-bold text-slate-300 group-hover/card:text-white transition-colors duration-200"
                 >
                   <span>View Case Study</span>
-                  <svg className="w-4 h-4 transition-transform group-hover/link:translate-x-1 duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 transition-transform group-hover/card:translate-x-1 duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
-                </a>
+                </div>
               </div>
-            </div>
+            </a>
 
             {/* Card 3: HR Automation Suite */}
-            <div className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-between hover:border-slate-700/60 transition-all duration-300 min-h-[340px]">
+            <a 
+              href="#works" 
+              onClick={() => setView('works')}
+              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-between hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 min-h-[340px] text-left cursor-pointer group/card"
+            >
               <div className="space-y-6">
                 <span className="text-[12px] font-bold uppercase tracking-widest text-[#cc6f2a]">
                   AUTOMATION
@@ -528,18 +538,16 @@ const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
                 </p>
               </div>
               <div className="pt-8">
-                <a 
-                  href="#works" 
-                  onClick={() => setView('works')}
-                  className="flex items-center gap-2 text-[14px] font-bold text-slate-300 hover:text-white cursor-pointer group/link"
+                <div 
+                  className="flex items-center gap-2 text-[14px] font-bold text-slate-300 group-hover/card:text-white transition-colors duration-200"
                 >
                   <span>View Case Study</span>
-                  <svg className="w-4 h-4 transition-transform group-hover/link:translate-x-1 duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 transition-transform group-hover/card:translate-x-1 duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
-                </a>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </section>

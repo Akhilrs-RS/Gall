@@ -59,7 +59,7 @@ const Navbar: React.FC<NavbarProps> = ({ view, setView, navigateToContact }) => 
         ? 'bg-[#07080a]/80 backdrop-blur-md border-b border-slate-900/80 shadow-lg' 
         : 'bg-[#07080a] border-b border-transparent'
     }`}>
-      <div className="max-w-7xl mx-auto px-6 md:px-12 h-24 flex items-center justify-between">
+      <div className="w-full px-6 md:px-12 lg:px-16 h-24 flex items-center justify-between">
         
         {/* Logo */}
         <div className="flex items-center">
@@ -466,7 +466,7 @@ const Navbar: React.FC<NavbarProps> = ({ view, setView, navigateToContact }) => 
             href="#careers" 
             onClick={() => setView('careers')}
             className={`text-[15px] font-medium transition-colors duration-200 ${
-              view === 'careers' ? 'text-[#cc6f2a]' : 'text-slate-300 hover:text-white'
+              view === 'careers' || view === 'careers-apply' ? 'text-[#cc6f2a]' : 'text-slate-300 hover:text-white'
             }`}
           >
             Careers
@@ -599,7 +599,7 @@ const Navbar: React.FC<NavbarProps> = ({ view, setView, navigateToContact }) => 
               <a 
                 href="#careers" 
                 onClick={() => handleMobileNav('careers')}
-                className={`block text-[18px] font-semibold py-2 hover:text-[#cc6f2a] transition-colors ${view === 'careers' ? 'text-[#cc6f2a]' : 'text-slate-100'}`}
+                className={`block text-[18px] font-semibold py-2 hover:text-[#cc6f2a] transition-colors ${view === 'careers' || view === 'careers-apply' ? 'text-[#cc6f2a]' : 'text-slate-100'}`}
               >
                 Careers
               </a>

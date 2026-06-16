@@ -9,5 +9,6 @@ namespace backend
         }
 
         public DbSet<ContactSubmission> ContactSubmissions { get; set; } = null!;
+        public DbSet<CareerSubmission> CareerSubmissions { get; set; } = null!;
     }
 }

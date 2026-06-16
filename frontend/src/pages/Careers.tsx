@@ -230,7 +230,9 @@ const Careers: React.FC<CareersProps> = ({ navigateToContact }) => {
 
             {/* Apply Now Button */}
             <button 
-              onClick={() => navigateToContact(2)}
+              onClick={() => {
+                window.location.hash = '#careers-apply'
+              }}
               className="bg-[#e2942b] hover:bg-[#cc6f2a] text-white px-16 py-4 rounded-full text-[15px] font-semibold flex items-center justify-center transition-colors cursor-pointer shadow-lg w-full max-w-sm"
             >
               Apply Now
