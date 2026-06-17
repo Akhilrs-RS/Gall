@@ -21,6 +21,16 @@ const CareersApply: React.FC<CareersApplyProps> = ({ navigateToContact }) => {
 
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      const element = document.getElementById('careers-apply-form')
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 150)
+    return () => clearTimeout(timer)
+  }, [])
+
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault()
     e.stopPropagation()
@@ -78,6 +88,18 @@ const CareersApply: React.FC<CareersApplyProps> = ({ navigateToContact }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      alert('Invalid email address. Please check your email address and try again.')
+      setErrorText('Please enter a valid email address.')
+      setStatus('error')
+      return
+    }
+    if (phone && phone.length !== 10) {
+      setErrorText('Phone number must be exactly 10 digits.')
+      setStatus('error')
+      return
+    }
     if (!resume) {
       setErrorText('Please upload your resume to complete the application.')
       setStatus('error')
@@ -90,7 +112,7 @@ const CareersApply: React.FC<CareersApplyProps> = ({ navigateToContact }) => {
     const formData = new FormData()
     formData.append('fullName', fullName)
     formData.append('email', email)
-    formData.append('phone', phone || '')
+    formData.append('phone', phone ? `+91 ${phone}` : '')
     formData.append('position', position)
     formData.append('experience', experience)
     formData.append('portfolio', portfolio || '')
@@ -226,14 +248,20 @@ const CareersApply: React.FC<CareersApplyProps> = ({ navigateToContact }) => {
                 <label className="block text-[14px] font-semibold tracking-wider text-slate-300 uppercase">
                   Phone Number
                 </label>
-                <input 
-                  type="tel" 
-                  placeholder="+91 00000 00000" 
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="w-full bg-[#0a0c10]/60 border border-slate-800/80 rounded-xl px-5 py-4 text-[15px] text-white placeholder-slate-600 focus:outline-none focus:border-[#e2942b] focus:ring-1 focus:ring-[#e2942b] transition-all" 
-                  disabled={status === 'submitting'}
-                />
+                <div className="relative flex items-center w-full">
+                  <span className="absolute left-5 text-[15px] text-slate-400 font-semibold select-none pointer-events-none">
+                    +91
+                  </span>
+                  <input 
+                    type="tel" 
+                    placeholder="Enter 10-digit number" 
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                    maxLength={10}
+                    className="w-full bg-[#0a0c10]/60 border border-slate-800/80 rounded-xl pl-16 pr-5 py-4 text-[15px] text-white placeholder-slate-600 focus:outline-none focus:border-[#e2942b] focus:ring-1 focus:ring-[#e2942b] transition-all" 
+                    disabled={status === 'submitting'}
+                  />
+                </div>
               </div>
 
               {/* Row 3: Position Applying For and Experience Level */}

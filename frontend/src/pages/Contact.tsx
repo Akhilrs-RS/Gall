@@ -1,5 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import contactImg from '../assets/contact.png'
+
+interface Country {
+  code: string;
+  flag: string;
+  name: string;
+  maxLength: number;
+}
+
+const countries: Country[] = [
+  { code: "+91", flag: "🇮🇳", name: "India", maxLength: 10 },
+  { code: "+1", flag: "🇺🇸", name: "United States", maxLength: 10 },
+  { code: "+44", flag: "🇬🇧", name: "United Kingdom", maxLength: 10 },
+  { code: "+61", flag: "🇦🇺", name: "Australia", maxLength: 9 },
+  { code: "+971", flag: "🇦🇪", name: "United Arab Emirates", maxLength: 9 },
+  { code: "+65", flag: "🇸🇬", name: "Singapore", maxLength: 8 },
+  { code: "+81", flag: "🇯🇵", name: "Japan", maxLength: 10 },
+  { code: "+49", flag: "🇩🇪", name: "Germany", maxLength: 11 },
+  { code: "+33", flag: "🇫🇷", name: "France", maxLength: 9 },
+  { code: "+1", flag: "🇨🇦", name: "Canada", maxLength: 10 },
+];
 
 interface ContactProps {
   navigateToContact: (page: 1 | 2 | 3) => void;
@@ -13,11 +33,43 @@ const Contact: React.FC<ContactProps> = () => {
   const [serviceOfInterest, setServiceOfInterest] = useState('')
   const [message, setMessage] = useState('')
 
+  const [selectedCountry, setSelectedCountry] = useState<Country>(countries[0]) // Default is India (+91)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      alert('Invalid email address. Please check your email address and try again.')
+      setErrorMessage('Please enter a valid email address.')
+      setStatus('error')
+      return
+    }
+
+    if (phone && phone.length !== selectedCountry.maxLength) {
+      alert(`Phone number must be exactly ${selectedCountry.maxLength} digits for ${selectedCountry.name}.`)
+      setErrorMessage(`Phone number must be exactly ${selectedCountry.maxLength} digits.`)
+      setStatus('error')
+      return
+    }
+
     setStatus('submitting')
     setErrorMessage('')
 
@@ -31,7 +83,7 @@ const Contact: React.FC<ContactProps> = () => {
           fullName,
           company: company || null,
           email,
-          phone: phone || null,
+          phone: phone ? `${selectedCountry.code} ${phone}` : null,
           serviceOfInterest: serviceOfInterest || null,
           message
         })
@@ -215,14 +267,58 @@ const Contact: React.FC<ContactProps> = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="block text-[14px] font-medium text-slate-400">Phone</label>
-                  <input 
-                    type="tel" 
-                    placeholder="+1(555)000-0000" 
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="w-full bg-[#0a0c10] border border-slate-800 rounded-xl px-5 py-4 text-[15px] text-white placeholder-slate-600 focus:outline-none focus:border-[#0091ff] focus:ring-1 focus:ring-[#0091ff] transition-all" 
-                    disabled={status === 'submitting'}
-                  />
+                  <div className="relative flex items-center w-full" ref={dropdownRef}>
+                    {/* Country Code Selector */}
+                    <div className="absolute left-0 top-0 bottom-0 flex items-center z-10">
+                      <button
+                        type="button"
+                        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                        className="flex items-center gap-1.5 px-4 h-full text-slate-300 hover:text-white rounded-l-xl focus:outline-none select-none border-r border-slate-800/80 bg-[#05070a]/50"
+                        disabled={status === 'submitting'}
+                      >
+                        <span className="text-[18px]">{selectedCountry.flag}</span>
+                        <span className="text-[14px] font-semibold">{selectedCountry.code}</span>
+                        <svg className="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                    </div>
+
+                    {/* Phone Number Input */}
+                    <input 
+                      type="tel" 
+                      placeholder={`Enter ${selectedCountry.maxLength}-digit number`}
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, selectedCountry.maxLength))}
+                      maxLength={selectedCountry.maxLength}
+                      className="w-full bg-[#0a0c10] border border-slate-800 rounded-xl pl-32 pr-5 py-4 text-[15px] text-white placeholder-slate-600 focus:outline-none focus:border-[#0091ff] focus:ring-1 focus:ring-[#0091ff] transition-all" 
+                      disabled={status === 'submitting'}
+                    />
+
+                    {/* Dropdown Menu */}
+                    {isDropdownOpen && (
+                      <div className="absolute top-full left-0 mt-2 w-72 max-h-60 overflow-y-auto bg-[#07080a] border border-slate-800 rounded-xl shadow-2xl z-50 py-1.5">
+                        {countries.map((c) => (
+                          <button
+                            key={c.code + c.name}
+                            type="button"
+                            onClick={() => {
+                              setSelectedCountry(c)
+                              setPhone('')
+                              setIsDropdownOpen(false)
+                            }}
+                            className="w-full flex items-center gap-3 px-4 py-3 hover:bg-slate-900/80 transition-colors text-left"
+                          >
+                            <span className="text-[20px]">{c.flag}</span>
+                            <div className="flex flex-col">
+                              <span className="text-[14px] font-semibold text-white">{c.name}</span>
+                              <span className="text-[12px] text-slate-400 font-medium">{c.code}</span>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
 

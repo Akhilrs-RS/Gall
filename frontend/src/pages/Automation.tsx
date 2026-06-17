@@ -42,7 +42,7 @@ const Automation: React.FC<AutomationProps> = ({ navigateToContact }) => {
       </section>
 
       {/* Automation Page 2: Overview & Key Features */}
-      <section id="automation-page-2" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 flex flex-col items-center">
+      <section id="automation-page-2" className="w-full bg-[#07080a] pt-24 md:pt-32 lg:pt-40 pb-0 border-t border-slate-900/60 flex flex-col items-center">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col items-center animate-fade-in">
           
           {/* Upper Half: Overview */}
@@ -126,7 +126,7 @@ const Automation: React.FC<AutomationProps> = ({ navigateToContact }) => {
       </section>
 
       {/* Automation Page 3: Business Benefits & Process */}
-      <section id="automation-page-3" className="w-full bg-[#07080a] py-24 md:py-32 lg:py-40 border-t border-slate-900/60 min-h-screen flex items-center">
+      <section id="automation-page-3" className="w-full bg-[#07080a] pt-16 md:pt-20 lg:pt-24 pb-24 md:pb-32 lg:pb-40 min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto px-6 md:px-12 w-full flex flex-col justify-between items-center animate-fade-in">
           {/* Upper Half: Business Benefits */}
           <div className="flex flex-col items-center text-center mb-16 w-full">

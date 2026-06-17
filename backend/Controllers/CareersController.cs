@@ -28,6 +28,11 @@ namespace backend.Controllers
                 return BadRequest(ModelState);
             }
 
+            if (!string.IsNullOrEmpty(dto.Phone) && !System.Text.RegularExpressions.Regex.IsMatch(dto.Phone, @"^\+91 \d{10}$"))
+            {
+                return BadRequest(new { message = "Phone number must be exactly 10 digits prefixed with +91." });
+            }
+
             if (dto.Resume == null || dto.Resume.Length == 0)
             {
                 return BadRequest(new { message = "Resume file is required." });
