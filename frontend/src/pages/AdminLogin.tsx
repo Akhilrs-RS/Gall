@@ -332,12 +332,6 @@ const AdminLogin: React.FC<AdminLoginProps> = () => {
 
           </form>
         </div>
-
-        {/* Info Notice */}
-        <div className="text-center mt-6 text-slate-500 text-[11px] leading-relaxed">
-          Default developer credentials: <code className="bg-slate-950 px-1.5 py-0.5 rounded border border-slate-900 text-slate-400">admin@galletrix.com</code> / <code className="bg-slate-950 px-1.5 py-0.5 rounded border border-slate-900 text-slate-400">admin123</code>
-        </div>
-
       </div>
     </div>
   )
