@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import type { ViewState } from '../types'
 import { getProjects } from '../utils/projectData'
 import type { Project } from '../utils/projectData'
-import videoMp4 from '../assets/video.mp4'
+import vMp4 from '../assets/v.mp4'
 import g1Img from '../assets/g1.png'
 import g2Img from '../assets/g2.png'
 import g3Img from '../assets/g3.png'
@@ -29,31 +29,16 @@ const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
 
   return (
     <>
-      {/* Page 1: Hero Section (video.mp4) */}
-      <section id="other-page" className="w-full relative lg:aspect-[3/2] bg-[#07080a] flex flex-col justify-between min-h-[calc(100vh-6rem)] lg:min-h-0 animate-fade-in">
-        {/* Desktop Background Video */}
-        <div className="absolute inset-0 hidden lg:block">
-          <video 
-            src={videoMp4} 
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
-            className="w-full h-full object-cover object-center"
-          />
-        </div>
-
-        {/* Mobile Block Video */}
-        <div className="w-full lg:hidden my-6">
-          <video 
-            src={videoMp4} 
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
-            className="w-full h-auto object-cover"
-          />
-        </div>
+      {/* Page 1: Hero Section (v.mp4) */}
+      <section id="other-page" className="w-full relative aspect-[9/16] lg:aspect-[16/9] bg-[#07080a] overflow-hidden animate-fade-in">
+        <video 
+          src={vMp4} 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
       </section>
 
       {/* Page 2: Who We Are Section */}
