@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import type { ViewState } from '../types'
+import { getProjects } from '../utils/projectData'
+import type { Project } from '../utils/projectData'
 import videoMp4 from '../assets/video.mp4'
 import g1Img from '../assets/g1.png'
 import g2Img from '../assets/g2.png'
@@ -14,6 +16,17 @@ interface OtherProps {
 }
 
 const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
+  const [projects, setProjects] = useState<Project[]>([])
+
+  useEffect(() => {
+    const allProjects = getProjects()
+    let featured = allProjects.filter(p => p.selectedWork)
+    if (featured.length === 0) {
+      featured = allProjects.slice(0, 3)
+    }
+    setProjects(featured.slice(0, 6))
+  }, [])
+
   return (
     <>
       {/* Page 1: Hero Section (video.mp4) */}
@@ -462,92 +475,36 @@ const Other: React.FC<OtherProps> = ({ setView, navigateToContact }) => {
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
-            {/* Card 1: Enterprise ERP Platform */}
-            <a 
-              href="#works" 
-              onClick={() => setView('works')}
-              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-between hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 min-h-[340px] text-left cursor-pointer group/card"
-            >
-              <div className="space-y-6">
-                <span className="text-[12px] font-bold uppercase tracking-widest text-[#cc6f2a]">
-                  ERP
-                </span>
-                <h3 className="font-serif text-[24px] font-medium text-white tracking-tight leading-snug">
-                  Enterprise ERP Platform
-                </h3>
-                <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
-                  End to end resource planning solution for a 500-person manufacturing company.
-                </p>
-              </div>
-              <div className="pt-8">
-                <div 
-                  className="flex items-center gap-2 text-[14px] font-bold text-slate-300 group-hover/card:text-white transition-colors duration-200"
-                >
-                  <span>View Case Study</span>
-                  <svg className="w-4 h-4 transition-transform group-hover/card:translate-x-1 duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
+            {projects.map((proj) => (
+              <a 
+                key={proj.id}
+                href="#works" 
+                onClick={() => setView('works')}
+                className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-between hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 min-h-[340px] text-left cursor-pointer group/card"
+              >
+                <div className="space-y-6">
+                  <span className="text-[12px] font-bold uppercase tracking-widest text-[#cc6f2a]">
+                    {proj.tag}
+                  </span>
+                  <h3 className="font-serif text-[24px] font-medium text-white tracking-tight leading-snug">
+                    {proj.title}
+                  </h3>
+                  <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
+                    {proj.description}
+                  </p>
                 </div>
-              </div>
-            </a>
-
-            {/* Card 2: HR Automation Suite */}
-            <a 
-              href="#works" 
-              onClick={() => setView('works')}
-              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-between hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 min-h-[340px] text-left cursor-pointer group/card"
-            >
-              <div className="space-y-6">
-                <span className="text-[12px] font-bold uppercase tracking-widest text-[#cc6f2a]">
-                  AUTOMATION
-                </span>
-                <h3 className="font-serif text-[24px] font-medium text-white tracking-tight leading-snug">
-                  HR Automation Suite
-                </h3>
-                <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
-                  End to end resource planning solution for a 500-person manufacturing company.
-                </p>
-              </div>
-              <div className="pt-8">
-                <div 
-                  className="flex items-center gap-2 text-[14px] font-bold text-slate-300 group-hover/card:text-white transition-colors duration-200"
-                >
-                  <span>View Case Study</span>
-                  <svg className="w-4 h-4 transition-transform group-hover/card:translate-x-1 duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
+                <div className="pt-8">
+                  <div 
+                    className="flex items-center gap-2 text-[14px] font-bold text-slate-300 group-hover/card:text-white transition-colors duration-200"
+                  >
+                    <span>View Case Study</span>
+                    <svg className="w-4 h-4 transition-transform group-hover/card:translate-x-1 duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </div>
                 </div>
-              </div>
-            </a>
-
-            {/* Card 3: HR Automation Suite */}
-            <a 
-              href="#works" 
-              onClick={() => setView('works')}
-              className="border border-slate-800/80 bg-slate-950/20 p-8 md:p-10 rounded-[24px] flex flex-col justify-between hover:border-[#cc6f2a]/60 hover:scale-[1.02] hover:bg-slate-900/40 hover:shadow-2xl hover:shadow-[#cc6f2a]/5 transition-all duration-300 min-h-[340px] text-left cursor-pointer group/card"
-            >
-              <div className="space-y-6">
-                <span className="text-[12px] font-bold uppercase tracking-widest text-[#cc6f2a]">
-                  AUTOMATION
-                </span>
-                <h3 className="font-serif text-[24px] font-medium text-white tracking-tight leading-snug">
-                  HR Automation Suite
-                </h3>
-                <p className="font-sans text-[14px] sm:text-[15px] leading-[1.65] text-slate-400">
-                  End to end resource planning solution for a 500-person manufacturing company.
-                </p>
-              </div>
-              <div className="pt-8">
-                <div 
-                  className="flex items-center gap-2 text-[14px] font-bold text-slate-300 group-hover/card:text-white transition-colors duration-200"
-                >
-                  <span>View Case Study</span>
-                  <svg className="w-4 h-4 transition-transform group-hover/card:translate-x-1 duration-200" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </div>
-              </div>
-            </a>
+              </a>
+            ))}
           </div>
         </div>
       </section>

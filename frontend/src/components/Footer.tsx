@@ -12,9 +12,9 @@ const Footer: React.FC<FooterProps> = ({ setView, navigateToContact }) => {
     <footer className="w-full bg-[#07080a] border-t border-[#0091ff] pt-20 pb-16">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 items-start">
-          {/* Brand and Description Column */}
-          <div className="col-span-12 md:col-span-6 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
+          {/* Brand, Description and Address Column */}
+          <div className="col-span-12 md:col-span-6 lg:col-span-4 space-y-6">
             <a href="#logo" onClick={(e) => { e.preventDefault(); setView('other'); }} className="hover:opacity-90 transition-opacity inline-block">
               <img 
                 src={logoImg} 
@@ -25,6 +25,19 @@ const Footer: React.FC<FooterProps> = ({ setView, navigateToContact }) => {
             <p className="text-slate-400 text-[15px] leading-relaxed max-w-sm">
               Architects of digital order. Building intelligent enterprise solutions for the modern era.
             </p>
+            
+            {/* Address Details */}
+            <div className="space-y-2.5 border-t border-slate-900/50 pt-6 text-left">
+              <h4 className="text-white text-[13px] font-bold tracking-wider uppercase">
+                OFFICE LOCATION
+              </h4>
+              <p className="text-slate-400 text-[14px] leading-relaxed">
+                Galletrix Innovations,<br />
+                GOG Tower, Kazhakkoottam<br />
+                (Opposite to Technopark Phase - 1),<br />
+                Thiruvananthapuram, Kerala - 695582
+              </p>
+            </div>
             
             {/* Social Icons */}
             <div className="flex items-center space-x-6 pt-2">
@@ -49,7 +62,7 @@ const Footer: React.FC<FooterProps> = ({ setView, navigateToContact }) => {
           </div>
 
           {/* Links Columns */}
-          <div className="col-span-12 md:col-span-6 grid grid-cols-3 gap-6 md:gap-8">
+          <div className="col-span-12 md:col-span-6 lg:col-span-5 grid grid-cols-3 gap-6 md:gap-8">
             {/* SOLUTIONS */}
             <div className="space-y-5">
               <h3 className="text-white text-[13px] font-bold tracking-wider uppercase">
@@ -87,6 +100,36 @@ const Footer: React.FC<FooterProps> = ({ setView, navigateToContact }) => {
                 <li><a href="#privacy-policy" className="text-slate-400 text-[14px] hover:text-white transition-colors duration-200">Privacy Policy</a></li>
                 <li><a href="#support" className="text-slate-400 text-[14px] hover:text-white transition-colors duration-200">Support</a></li>
               </ul>
+            </div>
+          </div>
+
+          {/* Google Map Column */}
+          <div className="col-span-12 lg:col-span-3 space-y-4 text-left">
+            <h3 className="text-white text-[13px] font-bold tracking-wider uppercase">
+              FIND US ON MAP
+            </h3>
+            <div className="relative w-full h-44 rounded-xl overflow-hidden border border-slate-900 shadow-2xl group hover:border-[#cc6f2a]/60 transition-all duration-300">
+              <iframe
+                title="Galletrix Innovations Location Map"
+                src="https://maps.google.com/maps?q=GOG%20Tower,%20Kazhakkoottam,%20Thiruvananthapuram,%20Kerala%20695582&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                className="absolute inset-0 w-full h-full border-0 filter invert grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+            <div>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=GOG+Tower,+Pallinada,+Kazhakkoottam,+Thiruvananthapuram,+Kerala+695582"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[12px] font-semibold text-[#cc6f2a] hover:text-[#b86120] transition-colors group/map-link"
+              >
+                <span>Open in Google Maps</span>
+                <svg className="w-3.5 h-3.5 transform group-hover/map-link:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>
