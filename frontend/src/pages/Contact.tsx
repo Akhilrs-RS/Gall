@@ -199,8 +199,8 @@ const Contact: React.FC<ContactProps> = () => {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[13px] text-slate-400 font-medium mb-0.5">Call Us</span>
-                  <a href="tel:+1800GALLETRIX" className="text-white text-[15px] font-semibold hover:underline">
-                    +1(800) GALLETRIX
+                  <a href="tel:+917305870929" className="text-white text-[15px] font-semibold hover:underline">
+                    +91 73058 70929
                   </a>
                 </div>
               </div>
