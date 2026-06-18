@@ -73,8 +73,9 @@ const Navbar: React.FC<NavbarProps> = ({ view, setView, navigateToContact }) => 
         </div>
 
         {/* Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-10">
-          <div className="group">
+        {view !== 'admin' && (
+          <nav className="hidden md:flex items-center space-x-10">
+            <div className="group">
             <a 
               href="#services"
               onClick={() => setView('services')}
@@ -485,41 +486,54 @@ const Navbar: React.FC<NavbarProps> = ({ view, setView, navigateToContact }) => 
             Contact
           </a>
         </nav>
+        )}
 
         {/* Call to Action Button & Mobile Menu Toggle */}
         <div className="flex items-center space-x-4">
-          <a 
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault()
-              handleMobileContact(2)
-            }}
-            className="hidden sm:inline-block bg-[#cc6f2a] hover:bg-[#b86120] text-white px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full text-[14px] sm:text-[15px] font-semibold tracking-wide transition-all duration-300 shadow-lg shadow-amber-950/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-center"
-          >
-            Let's Talk
-          </a>
+          {view === 'admin' ? (
+            <a 
+              href="#other"
+              onClick={() => handleMobileNav('other')}
+              className="bg-transparent hover:bg-slate-900 border border-slate-800 text-slate-300 hover:text-white px-5 py-2 rounded-full text-[13px] sm:text-[14px] font-semibold tracking-wide transition-all duration-300 shadow-md hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-center"
+            >
+              Back to Website
+            </a>
+          ) : (
+            <>
+              <a 
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleMobileContact(2)
+                }}
+                className="hidden sm:inline-block bg-[#cc6f2a] hover:bg-[#b86120] text-white px-6 py-2.5 sm:px-8 sm:py-3.5 rounded-full text-[14px] sm:text-[15px] font-semibold tracking-wide transition-all duration-300 shadow-lg shadow-amber-950/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-center"
+              >
+                Let's Talk
+              </a>
 
-          {/* Hamburger Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900/60 transition-colors focus:outline-none"
-            aria-label="Toggle Menu"
-          >
-            {isMobileMenuOpen ? (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
+              {/* Hamburger Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden flex items-center justify-center w-10 h-10 rounded-lg text-slate-300 hover:text-white hover:bg-slate-900/60 transition-colors focus:outline-none"
+                aria-label="Toggle Menu"
+              >
+                {isMobileMenuOpen ? (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+            </>
+          )}
         </div>
       </div>
 
       {/* Mobile Drawer Overlay */}
-      {isMobileMenuOpen && (
+      {view !== 'admin' && isMobileMenuOpen && (
         <div className="md:hidden fixed inset-x-0 bottom-0 top-24 bg-[#07080a] border-t border-slate-900/80 z-40 overflow-y-auto animate-fade-in flex flex-col justify-between">
           <div className="px-6 py-8 space-y-6">
             {/* Services (Collapsible) */}

@@ -24,6 +24,7 @@ import Retail from './pages/Retail'
 import Finance from './pages/Finance'
 import CorporateOperations from './pages/CorporateOperations'
 import CareersApply from './pages/CareersApply'
+import AdminLogin from './pages/AdminLogin'
 
 function App() {
   const [view, setView] = useState<ViewState>('other')
@@ -44,9 +45,22 @@ function App() {
   }
 
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleLocationChange = (isInitial = false) => {
       const hash = window.location.hash
-      if (hash.startsWith('#industry')) {
+      const path = window.location.pathname
+
+      if (path === '/admin' || path === '/admin/') {
+        if (!isInitial && hash && hash !== '#admin' && hash !== '#/admin') {
+          window.history.pushState(null, '', '/' + hash)
+        } else if (hash === '#admin' || hash === '#/admin' || !hash) {
+          setView('admin')
+          return
+        }
+      }
+
+      if (hash.startsWith('#admin') || hash.startsWith('#/admin')) {
+        setView('admin')
+      } else if (hash.startsWith('#industry')) {
         setView('industry')
       } else if (hash.startsWith('#services')) {
         setView('services')
@@ -107,9 +121,15 @@ function App() {
       }
     }
 
-    handleHashChange()
-    window.addEventListener('hashchange', handleHashChange)
-    return () => window.removeEventListener('hashchange', handleHashChange)
+    handleLocationChange(true)
+
+    const onLocationChange = () => handleLocationChange(false)
+    window.addEventListener('hashchange', onLocationChange)
+    window.addEventListener('popstate', onLocationChange)
+    return () => {
+      window.removeEventListener('hashchange', onLocationChange)
+      window.removeEventListener('popstate', onLocationChange)
+    }
   }, [])
 
   useEffect(() => {
@@ -149,9 +169,10 @@ function App() {
         {view === 'careers' && <Careers navigateToContact={navigateToContact} />}
         {view === 'careers-apply' && <CareersApply navigateToContact={navigateToContact} />}
         {view === 'other' && <Other setView={setView} navigateToContact={navigateToContact} />}
+        {view === 'admin' && <AdminLogin navigateToContact={navigateToContact} />}
       </main>
 
-      <Footer setView={setView} navigateToContact={navigateToContact} />
+      {view !== 'admin' && <Footer setView={setView} navigateToContact={navigateToContact} />}
     </div>
   )
 }
